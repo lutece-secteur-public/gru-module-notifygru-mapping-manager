@@ -1,0 +1,16 @@
+<#include "managemodulenotifygrumappingmanager_tabs.html" />
+<@tabs tab="notifygrumappingmanager" />
+
+<@rowBoxHeader i18nTitleKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.pageTitle">
+    <form class="form-horizontal" method="post" name="modify_notifygrumappingmanager" action="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp">
+        <@messages errors=errors />
+        <input type="hidden" id="id" name="id" value="${notifygrumappingmanager.id}"/>
+        
+        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelBeanKey" inputName="beankey" mandatory=true value="${notifygrumappingmanager.beanKey}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelBeanKey.help" />
+        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber" inputName="mobilephonenumber" mandatory=true value="${notifygrumappingmanager.mobilePhoneNumber}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber.help" />
+        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber" inputName="fixedphonenumber" mandatory=true value="${notifygrumappingmanager.fixedPhoneNumber}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber.help" />
+        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelEmail" inputName="email" mandatory=true value="${notifygrumappingmanager.email}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelEmail.help" />
+        <@actionButtons button1Name="action_modifyNotifygruMappingManager" button2Name="view_manageNotifygruMappingManagers"/>
+    </form>
+</@rowBoxHeader>
+
