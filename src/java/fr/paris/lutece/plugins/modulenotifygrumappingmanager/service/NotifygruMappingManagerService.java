@@ -11,10 +11,13 @@ import fr.paris.lutece.util.ReferenceList;
 public class NotifygruMappingManagerService {
 
 	
+	private static String PARAM_MAPING_NONE="Aucun";
+	
 	 public static ReferenceList getListProvider()
 	    {
 	        ReferenceList refenreceList = new ReferenceList(  );
-	        refenreceList.addItem("", "");
+	        
+	        
 
 	        for ( AbstractServiceProvider provider : SpringContextService.getBeansOfType( AbstractServiceProvider.class ) )
 	        {
@@ -31,16 +34,19 @@ public class NotifygruMappingManagerService {
 	        return refenreceList;
 	    }
 	 
+
+	 
 	
 	 public static ReferenceList getListEntryOfProvider(String strKey)
 	 {
 		 
 		 ReferenceList refenreceList = new ReferenceList(  );
+		 refenreceList.addItem(-1, PARAM_MAPING_NONE);
 		 
 		 if(ServiceConfigTaskForm.isBeanExiste( strKey ))
 		 {
 			 AbstractServiceProvider provider = ServiceConfigTaskForm.getCostumizeBean( strKey  );
-			 refenreceList=provider.getReferenteListEntityProvider();
+			 refenreceList.addAll(provider.getReferenteListEntityProvider());
 		 }
 		 
 		 

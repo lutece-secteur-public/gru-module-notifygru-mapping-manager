@@ -7,11 +7,13 @@
         <input type="hidden" id="id" name="id"/>
     
     
- <@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey" 
-                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey.help"
-                        inputName="beankey"   mandatory=true   value="1"  cssClass='form-control'>
+
+
+<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey" 
+                        i18nHelpBlockKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey.help"
+                        inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="beankey"   default_value="value"   additionalParameters='id="BeanKey""'  items=list_provider    />
+<@comboSiteWithParams name="beankey"   default_value="1"   additionalParameters='id="beankey" onChange="loadForm()"  '  items=list_provider    />
 </@fieldInputWrapper>
           
           
@@ -20,7 +22,7 @@
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber.help"
                         inputName="mobilephonenumber"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="mobilephonenumber"   default_value="1"   additionalParameters='id="MobilePhoneNumber"'  items=list_position    />
+<@comboSiteWithParams name="mobilephonenumber"   default_value="1"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
 </@fieldInputWrapper>
 
     
@@ -30,7 +32,7 @@
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber.help"
                         inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="fixedphonenumber"   default_value="1"   additionalParameters='id="FixedPhoneNumber"'  items=list_position    />
+<@comboSiteWithParams name="fixedphonenumber"   default_value="1"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
 </@fieldInputWrapper>
 
        
@@ -38,9 +40,9 @@
                         
 <@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelEmail" 
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelEmail.help"
-                        inputName="email"   mandatory=true   value=""  cssClass='form-control'>
+                        inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="email"   default_value="1"   additionalParameters='id="Email"'  items=list_position    />
+<@comboSiteWithParams name="email"   default_value="1"   additionalParameters='id="email"'  items=list_position    />
 </@fieldInputWrapper>
   
         
@@ -53,3 +55,72 @@
     </form>
 </@rowBoxHeader>
 
+
+<script type="text/javascript">
+
+
+
+
+
+window.onload =  loadForm();
+	
+	
+	function loadForm()
+{
+
+	var strkey = $('#beankey').val()
+	
+//console.log("${BASE_URL}")
+
+    $.ajax({
+          type: 'POST',
+          url: '${BASE_URL}rest/modulenotifygrumappingmanager/notifygrumappingmanager',
+          headers: {              
+              'Content-Type':'application/json'
+          },
+          dataType: 'json',
+          data: {"${AJAX_KEY}": strkey},
+          timeout: 20000,
+          success: function (data) {
+
+
+    var form = (data.form!==undefined) ? data.form:{};
+    var formValue = (data.formValue!==undefined) ? data.formValue:{};
+    
+  var OptionForm="";
+    $.each(form,function(position,title){
+    	
+    	OptionForm+="<option value="+position+"> "+title+" </option>";
+    });
+
+    
+    $("#mobilephonenumber").html(OptionForm);
+    $("#fixedphonenumber").html(OptionForm);
+    $("#email").html(OptionForm);
+    
+   $.each(formValue,function(title,position){
+    	
+    	$("#"+title).val(position);
+    });
+    
+          },
+          error: function (request) {
+
+    
+console.log("errror du webservidse")
+          }
+
+
+
+
+
+      });  
+	
+
+
+}
+
+
+	
+	
+</script>

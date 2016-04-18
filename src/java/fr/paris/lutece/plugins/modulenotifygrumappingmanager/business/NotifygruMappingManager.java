@@ -33,7 +33,9 @@
  */ 
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
+
 import org.hibernate.validator.constraints.*;
 
 import java.io.Serializable;
@@ -49,6 +51,7 @@ public class NotifygruMappingManager implements Serializable
     // Variables declarations 
     private int _nId;
     
+  
     @NotEmpty( message = "#i18n{modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.notEmpty}" )
     @Size( max = 255 , message = "#i18n{modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.size}" ) 
     private String _strBeanKey;

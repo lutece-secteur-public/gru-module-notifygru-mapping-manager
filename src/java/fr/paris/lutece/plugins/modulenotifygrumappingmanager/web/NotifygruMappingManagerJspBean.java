@@ -38,19 +38,30 @@ package fr.paris.lutece.plugins.modulenotifygrumappingmanager.web;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManager;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManagerHome;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.service.NotifygruMappingManagerService;
+import fr.paris.lutece.plugins.modulenotifygrumappingmanager.web.rs.Constants;
+import fr.paris.lutece.plugins.workflow.modules.notifygru.service.AbstractServiceProvider;
+import fr.paris.lutece.plugins.workflow.modules.notifygru.service.ServiceConfigTaskForm;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
+import fr.paris.lutece.portal.service.util.AppLogService;
+import fr.paris.lutece.portal.service.util.AppPathService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.bean.BeanUtil;
 import fr.paris.lutece.util.url.UrlItem;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -86,6 +97,8 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String MARK_NOTIFYGRUMAPPINGMANAGER = "notifygrumappingmanager";
     private static final String MARK_NOTIFYGRU_FORM_LIST_PROVIDER= "list_provider";
     private static final String MARK_NOTIFYGRU_FORM_LIST_POSITION= "list_position";
+    private static final String MARK_BASE_URL= "BASE_URL";
+    private static final String MARK_KEY_AJAX= "AJAX_KEY";
 
     private static final String JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp";
 
@@ -144,14 +157,15 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
         Map<String, Object> model = getModel(  );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _notifygrumappingmanager );
         model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, NotifygruMappingManagerService.getListProvider() );
+  
         
-        ReferenceList refenreceList = new ReferenceList(  );
-        refenreceList.addItem(1, "telephone fixe");
-        refenreceList.addItem(2, "telephone mobile");
-        refenreceList.addItem(3, "email");
-        refenreceList.addItem(4, "adresse");
+    	UrlItem url = new UrlItem(AppPathService.getBaseUrl(request));
+    	
+       
         
-        model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION , refenreceList );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION , new ReferenceList(  ) );
+        model.put( MARK_BASE_URL , url );
+        model.put( MARK_KEY_AJAX , Constants.KEY_BEAN );
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_CREATE_NOTIFYGRUMAPPINGMANAGER, model );
     }
@@ -165,12 +179,23 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     @Action( ACTION_CREATE_NOTIFYGRUMAPPINGMANAGER )
     public String doCreateNotifygruMappingManager( HttpServletRequest request )
     {
+    	
+    	   _notifygrumappingmanager = ( _notifygrumappingmanager != null ) ? _notifygrumappingmanager : new NotifygruMappingManager(  );
+    	   
         populate(request );
 
         // Check constraints
         if ( !validateBean( _notifygrumappingmanager, VALIDATION_ATTRIBUTES_PREFIX ) )
         {
             return redirectView( request, VIEW_CREATE_NOTIFYGRUMAPPINGMANAGER );
+        }
+        
+        if(exitMapping())
+        {
+        	
+        	addError("modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.exist", getLocale(  ));
+        	return redirectView( request, VIEW_CREATE_NOTIFYGRUMAPPINGMANAGER );
+        	
         }
 
         NotifygruMappingManagerHome.create( _notifygrumappingmanager );
@@ -181,11 +206,32 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     
     protected void populate(HttpServletRequest request )
     {
+    
+               try {       	
+    		  int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER ) );
+    		  _notifygrumappingmanager.setId( nId );  
+               }
+               catch(NumberFormatException nfe)  
+               {  
+             AppLogService.info("insertion of mapping");
+               }   		 	
+    	
+    	 
     	_notifygrumappingmanager.setBeanKey( request.getParameter( PARAMS_REQUEST_BEAN_KEY ) );    
-    	_notifygrumappingmanager.setEmail( Integer.parseInt( request.getParameter( PARAMS_REQUEST_EMAIL ) ));
-    	_notifygrumappingmanager.setFixedPhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_MOBILE_PHONE_NUMBER ) ));
-    	_notifygrumappingmanager.setMobilePhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_FIXED_PHONE_NUMBER ) ));
+    	_notifygrumappingmanager.setEmail( Integer.parseInt( request.getParameter( PARAMS_REQUEST_EMAIL ) ));    	
+    	_notifygrumappingmanager.setMobilePhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_MOBILE_PHONE_NUMBER ) ));
+    	_notifygrumappingmanager.setFixedPhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_FIXED_PHONE_NUMBER ) ));
       
+    }
+    
+    private Boolean exitMapping()
+    {
+    //not dublicate
+    	if(NotifygruMappingManagerHome.findByPrimaryKey(_notifygrumappingmanager.getBeanKey())!=null)
+    	{
+    		return true;
+    	}
+    	return false;
     }
 
     /**
@@ -239,9 +285,49 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
         {
             _notifygrumappingmanager = NotifygruMappingManagerHome.findByPrimaryKey( nId );
         }
+        
+        ReferenceList refenreceListBean = new ReferenceList(  );
+        ReferenceList listPosition = new ReferenceList(  );
+        
+        if(_notifygrumappingmanager != null && ServiceConfigTaskForm.isBeanExiste( _notifygrumappingmanager.getBeanKey() ))
+        {
+        	 AbstractServiceProvider _notifyGruService = ServiceConfigTaskForm.getCostumizeBean(_notifygrumappingmanager.getBeanKey() );
+        	 
+      
+        	 if (_notifyGruService!=null && _notifyGruService.isManagerProvider(  ) )
+	            {
+        		 
+        		  ReferenceList rListInstance = _notifyGruService.buildReferenteListProvider();
+        		
+        		   
+        		
+        		  for (ReferenceItem provider : rListInstance) {
+					
+        			  AppLogService.debug("\n\n\n\n\n\n  provider.getCode() = "+provider.getCode()+"    _notifygrumappingmanager.getBeanKey() = "+_notifygrumappingmanager.getBeanKey());
+        			  if(provider.getCode().equals(_notifygrumappingmanager.getBeanKey()))
+        			  {
+        				  refenreceListBean.add(provider);        				 
+        				  listPosition = NotifygruMappingManagerService.getListEntryOfProvider(provider.getCode());
+        			  }
+				}
+        		 
+        	
+        }
+        
+        }
 
+        
+        
+       
+        
         Map<String, Object> model = getModel(  );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _notifygrumappingmanager );
+        
+        
+ model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, refenreceListBean );
+  
+        
+  model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION ,listPosition );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_MODIFY_NOTIFYGRUMAPPINGMANAGER, model );
     }
@@ -255,7 +341,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     @Action( ACTION_MODIFY_NOTIFYGRUMAPPINGMANAGER )
     public String doModifyNotifygruMappingManager( HttpServletRequest request )
     {
-        populate( _notifygrumappingmanager, request );
+        populate(request );
 
         // Check constraints
         if ( !validateBean( _notifygrumappingmanager, VALIDATION_ATTRIBUTES_PREFIX ) )

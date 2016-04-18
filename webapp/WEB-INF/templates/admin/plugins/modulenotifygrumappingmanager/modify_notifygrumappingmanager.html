@@ -6,10 +6,45 @@
         <@messages errors=errors />
         <input type="hidden" id="id" name="id" value="${notifygrumappingmanager.id}"/>
         
-        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelBeanKey" inputName="beankey" mandatory=true value="${notifygrumappingmanager.beanKey}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelBeanKey.help" />
-        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber" inputName="mobilephonenumber" mandatory=true value="${notifygrumappingmanager.mobilePhoneNumber}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber.help" />
-        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber" inputName="fixedphonenumber" mandatory=true value="${notifygrumappingmanager.fixedPhoneNumber}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber.help" />
-        <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelEmail" inputName="email" mandatory=true value="${notifygrumappingmanager.email}" i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelEmail.help" />
+     <@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelBeanKey" 
+                        i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelBeanKey.help"
+                        inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>                        
+<@comboSiteWithParams name="beankey"   default_value="${notifygrumappingmanager.beanKey}"   additionalParameters='id="beankey"  '  items=list_provider    />
+</@fieldInputWrapper>
+          
+
+          
+<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber" 
+                        i18nHelpBlockKey ="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber.help"
+                        inputName="mobilephonenumber"   mandatory=true   value="0"  cssClass='form-control'>                        
+<@comboSiteWithParams name="mobilephonenumber"   default_value="${notifygrumappingmanager.mobilePhoneNumber}"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
+</@fieldInputWrapper>
+
+
+
+
+                 
+<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber" 
+                        i18nHelpBlockKey ="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber.help"
+                        inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="fixedphonenumber"   default_value="${notifygrumappingmanager.fixedPhoneNumber}"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
+</@fieldInputWrapper>
+
+
+ 
+
+                        
+<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelEmail" 
+                        i18nHelpBlockKey ="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelEmail.help"
+                        inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
+                        
+<@comboSiteWithParams name="email"   default_value="${notifygrumappingmanager.email}"   additionalParameters='id="email"'  items=list_position    />
+</@fieldInputWrapper>
+  
+      
+      
+      
         <@actionButtons button1Name="action_modifyNotifygruMappingManager" button2Name="view_manageNotifygruMappingManagers"/>
     </form>
 </@rowBoxHeader>
