@@ -35,6 +35,11 @@
  
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.web;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManager;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManagerHome;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.service.NotifygruMappingManagerService;
@@ -45,23 +50,12 @@ import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPathService;
-import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
-import fr.paris.lutece.util.bean.BeanUtil;
 import fr.paris.lutece.util.url.UrlItem;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -289,9 +283,9 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
         ReferenceList refenreceListBean = new ReferenceList(  );
         ReferenceList listPosition = new ReferenceList(  );
         
-        if(_notifygrumappingmanager != null && ServiceConfigTaskForm.isBeanExiste( _notifygrumappingmanager.getBeanKey() ))
+        if(_notifygrumappingmanager != null && ServiceConfigTaskForm.isBeanExists( _notifygrumappingmanager.getBeanKey() ))
         {
-        	 AbstractServiceProvider _notifyGruService = ServiceConfigTaskForm.getCostumizeBean(_notifygrumappingmanager.getBeanKey() );
+        	 AbstractServiceProvider _notifyGruService = ServiceConfigTaskForm.getCustomizedBean(_notifygrumappingmanager.getBeanKey() );
         	 
       
         	 if (_notifyGruService!=null && _notifyGruService.isManagerProvider(  ) )

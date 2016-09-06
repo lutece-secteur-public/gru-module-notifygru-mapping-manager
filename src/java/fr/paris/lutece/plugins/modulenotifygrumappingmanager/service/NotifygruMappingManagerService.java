@@ -43,9 +43,9 @@ public class NotifygruMappingManagerService {
 		 ReferenceList refenreceList = new ReferenceList(  );
 		 refenreceList.addItem(-1, PARAM_MAPING_NONE);
 		 
-		 if(ServiceConfigTaskForm.isBeanExiste( strKey ))
+		 if(ServiceConfigTaskForm.isBeanExists( strKey ))
 		 {
-			 AbstractServiceProvider provider = ServiceConfigTaskForm.getCostumizeBean( strKey  );
+			 AbstractServiceProvider provider = ServiceConfigTaskForm.getCustomizedBean( strKey  );
 			 refenreceList.addAll(provider.getReferenteListEntityProvider());
 		 }
 		 
