@@ -36,7 +36,6 @@ package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
 import fr.paris.lutece.test.LuteceTestCase;
 
-
 public class NotifygruMappingManagerBusinessTest extends LuteceTestCase
 {
     private final static String BEANKEY1 = "BeanKey1";
@@ -48,10 +47,10 @@ public class NotifygruMappingManagerBusinessTest extends LuteceTestCase
     private final static int EMAIL1 = 1;
     private final static int EMAIL2 = 2;
 
-    public void testBusiness(  )
+    public void testBusiness( )
     {
         // Initialize an object
-        NotifygruMappingManager notifygruMappingManager = new NotifygruMappingManager();
+        NotifygruMappingManager notifygruMappingManager = new NotifygruMappingManager( );
         notifygruMappingManager.setBeanKey( BEANKEY1 );
         notifygruMappingManager.setMobilePhoneNumber( MOBILEPHONENUMBER1 );
         notifygruMappingManager.setFixedPhoneNumber( FIXEDPHONENUMBER1 );
@@ -60,10 +59,10 @@ public class NotifygruMappingManagerBusinessTest extends LuteceTestCase
         // Create test
         NotifygruMappingManagerHome.create( notifygruMappingManager );
         NotifygruMappingManager notifygruMappingManagerStored = NotifygruMappingManagerHome.findByPrimaryKey( notifygruMappingManager.getId( ) );
-        assertEquals( notifygruMappingManagerStored.getBeanKey() , notifygruMappingManager.getBeanKey( ) );
-        assertEquals( notifygruMappingManagerStored.getMobilePhoneNumber() , notifygruMappingManager.getMobilePhoneNumber( ) );
-        assertEquals( notifygruMappingManagerStored.getFixedPhoneNumber() , notifygruMappingManager.getFixedPhoneNumber( ) );
-        assertEquals( notifygruMappingManagerStored.getEmail() , notifygruMappingManager.getEmail( ) );
+        assertEquals( notifygruMappingManagerStored.getBeanKey( ), notifygruMappingManager.getBeanKey( ) );
+        assertEquals( notifygruMappingManagerStored.getMobilePhoneNumber( ), notifygruMappingManager.getMobilePhoneNumber( ) );
+        assertEquals( notifygruMappingManagerStored.getFixedPhoneNumber( ), notifygruMappingManager.getFixedPhoneNumber( ) );
+        assertEquals( notifygruMappingManagerStored.getEmail( ), notifygruMappingManager.getEmail( ) );
 
         // Update test
         notifygruMappingManager.setBeanKey( BEANKEY2 );
@@ -72,19 +71,19 @@ public class NotifygruMappingManagerBusinessTest extends LuteceTestCase
         notifygruMappingManager.setEmail( EMAIL2 );
         NotifygruMappingManagerHome.update( notifygruMappingManager );
         notifygruMappingManagerStored = NotifygruMappingManagerHome.findByPrimaryKey( notifygruMappingManager.getId( ) );
-        assertEquals( notifygruMappingManagerStored.getBeanKey() , notifygruMappingManager.getBeanKey( ) );
-        assertEquals( notifygruMappingManagerStored.getMobilePhoneNumber() , notifygruMappingManager.getMobilePhoneNumber( ) );
-        assertEquals( notifygruMappingManagerStored.getFixedPhoneNumber() , notifygruMappingManager.getFixedPhoneNumber( ) );
-        assertEquals( notifygruMappingManagerStored.getEmail() , notifygruMappingManager.getEmail( ) );
+        assertEquals( notifygruMappingManagerStored.getBeanKey( ), notifygruMappingManager.getBeanKey( ) );
+        assertEquals( notifygruMappingManagerStored.getMobilePhoneNumber( ), notifygruMappingManager.getMobilePhoneNumber( ) );
+        assertEquals( notifygruMappingManagerStored.getFixedPhoneNumber( ), notifygruMappingManager.getFixedPhoneNumber( ) );
+        assertEquals( notifygruMappingManagerStored.getEmail( ), notifygruMappingManager.getEmail( ) );
 
         // List test
-        NotifygruMappingManagerHome.getNotifygruMappingManagersList();
+        NotifygruMappingManagerHome.getNotifygruMappingManagersList( );
 
         // Delete test
         NotifygruMappingManagerHome.remove( notifygruMappingManager.getId( ) );
         notifygruMappingManagerStored = NotifygruMappingManagerHome.findByPrimaryKey( notifygruMappingManager.getId( ) );
         assertNull( notifygruMappingManagerStored );
-        
+
     }
 
 }

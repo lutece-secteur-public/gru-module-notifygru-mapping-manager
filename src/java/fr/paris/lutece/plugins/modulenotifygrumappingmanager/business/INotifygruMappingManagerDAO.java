@@ -31,14 +31,12 @@
  *
  * License 1.0
  */
- 
+
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
 
 import java.util.List;
-
-
 
 /**
  * INotifygruMappingManagerDAO Interface
@@ -47,57 +45,74 @@ public interface INotifygruMappingManagerDAO
 {
     /**
      * Insert a new record in the table.
-     * @param notifygruMappingManager instance of the NotifygruMappingManager object to insert
-     * @param plugin the Plugin
+     * 
+     * @param notifygruMappingManager
+     *            instance of the NotifygruMappingManager object to insert
+     * @param plugin
+     *            the Plugin
      */
     void insert( NotifygruMappingManager notifygruMappingManager, Plugin plugin );
 
     /**
      * Update the record in the table
-     * @param notifygruMappingManager the reference of the NotifygruMappingManager
-     * @param plugin the Plugin
+     * 
+     * @param notifygruMappingManager
+     *            the reference of the NotifygruMappingManager
+     * @param plugin
+     *            the Plugin
      */
     void store( NotifygruMappingManager notifygruMappingManager, Plugin plugin );
 
     /**
      * Delete a record from the table
-     * @param nKey The identifier of the NotifygruMappingManager to delete
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the NotifygruMappingManager to delete
+     * @param plugin
+     *            the Plugin
      */
     void delete( int nKey, Plugin plugin );
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Load the data from the table
-     * @param nKey The identifier of the notifygruMappingManager
-     * @param plugin the Plugin
+     * 
+     * @param nKey
+     *            The identifier of the notifygruMappingManager
+     * @param plugin
+     *            the Plugin
      * @return The instance of the notifygruMappingManager
      */
     NotifygruMappingManager load( int nKey, Plugin plugin );
 
     /**
      * Load the data of all the notifygruMappingManager objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the data of all the notifygruMappingManager objects
      */
     List<NotifygruMappingManager> selectNotifygruMappingManagersList( Plugin plugin );
-    
+
     /**
      * Load the id of all the notifygruMappingManager objects and returns them as a collection
-     * @param plugin the Plugin
+     * 
+     * @param plugin
+     *            the Plugin
      * @return The collection which contains the id of all the notifygruMappingManager objects
      */
     List<Integer> selectIdNotifygruMappingManagersList( Plugin plugin );
 
-	/**
-	 * Load.
-	 *
-	 * @param strKey the str key
-	 * @param plugin the plugin
-	 * @return the notifygru mapping manager
-	 */
-	NotifygruMappingManager load(String strKey, Plugin plugin);
+    /**
+     * Load.
+     *
+     * @param strKey
+     *            the str key
+     * @param plugin
+     *            the plugin
+     * @return the notifygru mapping manager
+     */
+    NotifygruMappingManager load( String strKey, Plugin plugin );
 }
-

@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright (c) 2002-2014, Mairie de Paris
  * All rights reserved.
  *
@@ -34,7 +34,7 @@
 
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.web.rs;
 
-public final class Constants 
+public final class Constants
 {
     public static final String NOTIFYGRUMAPPINGMANAGER_PATH = "notifygrumappingmanager/";
     public static final String PLUGIN_PATH = "modulenotifygrumappingmanager/";

@@ -31,7 +31,7 @@
  *
  * License 1.0
  */
- 
+
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
 import fr.paris.lutece.portal.service.plugin.Plugin;
@@ -53,14 +53,16 @@ public final class NotifygruMappingManagerHome
     /**
      * Private constructor - this class need not be instantiated
      */
-    private NotifygruMappingManagerHome(  )
+    private NotifygruMappingManagerHome( )
     {
     }
 
     /**
      * Create an instance of the notifygruMappingManager class
-     * @param notifygruMappingManager The instance of the NotifygruMappingManager which contains the informations to store
-     * @return The  instance of notifygruMappingManager which has been created with its primary key.
+     * 
+     * @param notifygruMappingManager
+     *            The instance of the NotifygruMappingManager which contains the informations to store
+     * @return The instance of notifygruMappingManager which has been created with its primary key.
      */
     public static NotifygruMappingManager create( NotifygruMappingManager notifygruMappingManager )
     {
@@ -71,8 +73,10 @@ public final class NotifygruMappingManagerHome
 
     /**
      * Update of the notifygruMappingManager which is specified in parameter
-     * @param notifygruMappingManager The instance of the NotifygruMappingManager which contains the data to store
-     * @return The instance of the  notifygruMappingManager which has been updated
+     * 
+     * @param notifygruMappingManager
+     *            The instance of the NotifygruMappingManager which contains the data to store
+     * @return The instance of the notifygruMappingManager which has been updated
      */
     public static NotifygruMappingManager update( NotifygruMappingManager notifygruMappingManager )
     {
@@ -83,44 +87,48 @@ public final class NotifygruMappingManagerHome
 
     /**
      * Remove the notifygruMappingManager whose identifier is specified in parameter
-     * @param nKey The notifygruMappingManager Id
+     * 
+     * @param nKey
+     *            The notifygruMappingManager Id
      */
     public static void remove( int nKey )
     {
         _dao.delete( nKey, _plugin );
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
     // Finders
 
     /**
      * Returns an instance of a notifygruMappingManager whose identifier is specified in parameter
-     * @param nKey The notifygruMappingManager primary key
+     * 
+     * @param nKey
+     *            The notifygruMappingManager primary key
      * @return an instance of NotifygruMappingManager
      */
     public static NotifygruMappingManager findByPrimaryKey( int nKey )
     {
-        return _dao.load( nKey, _plugin);
+        return _dao.load( nKey, _plugin );
     }
-    
-    
-    
+
     public static NotifygruMappingManager findByPrimaryKey( String strKey )
     {
-        return _dao.load( strKey, _plugin);
+        return _dao.load( strKey, _plugin );
     }
 
     /**
      * Load the data of all the notifygruMappingManager objects and returns them in form of a collection
+     * 
      * @return the collection which contains the data of all the notifygruMappingManager objects
      */
     public static List<NotifygruMappingManager> getNotifygruMappingManagersList( )
     {
         return _dao.selectNotifygruMappingManagersList( _plugin );
     }
-    
+
     /**
      * Load the id of all the notifygruMappingManager objects and returns them in form of a collection
+     * 
      * @return the collection which contains the id of all the notifygruMappingManager objects
      */
     public static List<Integer> getIdNotifygruMappingManagersList( )
@@ -128,4 +136,3 @@ public final class NotifygruMappingManagerHome
         return _dao.selectIdNotifygruMappingManagersList( _plugin );
     }
 }
-

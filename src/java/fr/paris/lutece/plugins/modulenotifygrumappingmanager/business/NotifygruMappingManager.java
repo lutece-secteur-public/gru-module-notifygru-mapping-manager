@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  * License 1.0
- */ 
+ */
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
 import javax.persistence.Column;
@@ -40,30 +40,29 @@ import org.hibernate.validator.constraints.*;
 
 import java.io.Serializable;
 
-
 /**
  * This is the business class for the object NotifygruMappingManager
- */ 
+ */
 public class NotifygruMappingManager implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-    // Variables declarations 
+    // Variables declarations
     private int _nId;
-    
-  
+
     @NotEmpty( message = "#i18n{modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.notEmpty}" )
-    @Size( max = 255 , message = "#i18n{modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.size}" ) 
+    @Size( max = 255, message = "#i18n{modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.size}" )
     private String _strBeanKey;
-    
+
     private int _nMobilePhoneNumber;
-    
+
     private int _nFixedPhoneNumber;
-    
+
     private int _nEmail;
 
     /**
      * Returns the Id
+     * 
      * @return The Id
      */
     public int getId( )
@@ -73,8 +72,10 @@ public class NotifygruMappingManager implements Serializable
 
     /**
      * Sets the Id
-     * @param nId The Id
-     */ 
+     * 
+     * @param nId
+     *            The Id
+     */
     public void setId( int nId )
     {
         _nId = nId;
@@ -82,6 +83,7 @@ public class NotifygruMappingManager implements Serializable
 
     /**
      * Returns the BeanKey
+     * 
      * @return The BeanKey
      */
     public String getBeanKey( )
@@ -91,14 +93,18 @@ public class NotifygruMappingManager implements Serializable
 
     /**
      * Sets the BeanKey
-     * @param strBeanKey The BeanKey
-     */ 
+     * 
+     * @param strBeanKey
+     *            The BeanKey
+     */
     public void setBeanKey( String strBeanKey )
     {
         _strBeanKey = strBeanKey;
     }
+
     /**
      * Returns the MobilePhoneNumber
+     * 
      * @return The MobilePhoneNumber
      */
     public int getMobilePhoneNumber( )
@@ -108,14 +114,18 @@ public class NotifygruMappingManager implements Serializable
 
     /**
      * Sets the MobilePhoneNumber
-     * @param nMobilePhoneNumber The MobilePhoneNumber
-     */ 
+     * 
+     * @param nMobilePhoneNumber
+     *            The MobilePhoneNumber
+     */
     public void setMobilePhoneNumber( int nMobilePhoneNumber )
     {
         _nMobilePhoneNumber = nMobilePhoneNumber;
     }
+
     /**
      * Returns the FixedPhoneNumber
+     * 
      * @return The FixedPhoneNumber
      */
     public int getFixedPhoneNumber( )
@@ -125,14 +135,18 @@ public class NotifygruMappingManager implements Serializable
 
     /**
      * Sets the FixedPhoneNumber
-     * @param nFixedPhoneNumber The FixedPhoneNumber
-     */ 
+     * 
+     * @param nFixedPhoneNumber
+     *            The FixedPhoneNumber
+     */
     public void setFixedPhoneNumber( int nFixedPhoneNumber )
     {
         _nFixedPhoneNumber = nFixedPhoneNumber;
     }
+
     /**
      * Returns the Email
+     * 
      * @return The Email
      */
     public int getEmail( )
@@ -142,8 +156,10 @@ public class NotifygruMappingManager implements Serializable
 
     /**
      * Sets the Email
-     * @param nEmail The Email
-     */ 
+     * 
+     * @param nEmail
+     *            The Email
+     */
     public void setEmail( int nEmail )
     {
         _nEmail = nEmail;

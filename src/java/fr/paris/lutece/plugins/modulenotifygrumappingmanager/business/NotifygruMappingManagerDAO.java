@@ -58,22 +58,24 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
 
     /**
      * Generates a new primary key
-     * @param plugin The Plugin
+     * 
+     * @param plugin
+     *            The Plugin
      * @return The new primary key
      */
-    public int newPrimaryKey( Plugin plugin)
+    public int newPrimaryKey( Plugin plugin )
     {
-        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK , plugin  );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin );
         daoUtil.executeQuery( );
 
         int nKey = 1;
 
-        if( daoUtil.next( ) )
+        if ( daoUtil.next( ) )
         {
-                nKey = daoUtil.getInt( 1 ) + 1;
+            nKey = daoUtil.getInt( 1 ) + 1;
         }
 
-        daoUtil.free();
+        daoUtil.free( );
 
         return nKey;
     }
@@ -89,12 +91,12 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         notifygruMappingManager.setId( newPrimaryKey( plugin ) );
 
         int nIndex = 1;
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getId( ) );
-        
-        daoUtil.setString( nIndex++ , notifygruMappingManager.getBeanKey( ) );
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getMobilePhoneNumber( ) );
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getFixedPhoneNumber( ) );
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getEmail( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getId( ) );
+
+        daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail( ) );
 
         daoUtil.executeUpdate( );
         daoUtil.free( );
@@ -107,7 +109,7 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
     public NotifygruMappingManager load( int nKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT, plugin );
-        daoUtil.setInt( 1 , nKey );
+        daoUtil.setInt( 1, nKey );
         daoUtil.executeQuery( );
 
         NotifygruMappingManager notifygruMappingManager = null;
@@ -115,7 +117,7 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         if ( daoUtil.next( ) )
         {
             int nIndex = 1;
-            notifygruMappingManager = new NotifygruMappingManager();
+            notifygruMappingManager = new NotifygruMappingManager( );
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
@@ -126,7 +128,7 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         daoUtil.free( );
         return notifygruMappingManager;
     }
-    
+
     /**
      * {@inheritDoc }
      */
@@ -134,7 +136,7 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
     public NotifygruMappingManager load( String strKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECT_BY_KEY, plugin );
-        daoUtil.setString( 1 , strKey );
+        daoUtil.setString( 1, strKey );
         daoUtil.executeQuery( );
 
         NotifygruMappingManager notifygruMappingManager = null;
@@ -142,7 +144,7 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         if ( daoUtil.next( ) )
         {
             int nIndex = 1;
-            notifygruMappingManager = new NotifygruMappingManager();
+            notifygruMappingManager = new NotifygruMappingManager( );
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
@@ -153,7 +155,6 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         daoUtil.free( );
         return notifygruMappingManager;
     }
-
 
     /**
      * {@inheritDoc }
@@ -162,7 +163,7 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
     public void delete( int nKey, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_DELETE, plugin );
-        daoUtil.setInt( 1 , nKey );
+        daoUtil.setInt( 1, nKey );
         daoUtil.executeUpdate( );
         daoUtil.free( );
     }
@@ -174,14 +175,14 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
     public void store( NotifygruMappingManager notifygruMappingManager, Plugin plugin )
     {
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_UPDATE, plugin );
-        
+
         int nIndex = 1;
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getId( ) );
-        daoUtil.setString( nIndex++ , notifygruMappingManager.getBeanKey( ) );
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getMobilePhoneNumber( ) );
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getFixedPhoneNumber( ) );
-        daoUtil.setInt( nIndex++ , notifygruMappingManager.getEmail( ) );
-        daoUtil.setInt( nIndex , notifygruMappingManager.getId( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getId( ) );
+        daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail( ) );
+        daoUtil.setInt( nIndex, notifygruMappingManager.getId( ) );
 
         daoUtil.executeUpdate( );
         daoUtil.free( );
@@ -193,19 +194,19 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
     @Override
     public List<NotifygruMappingManager> selectNotifygruMappingManagersList( Plugin plugin )
     {
-        List<NotifygruMappingManager> notifygruMappingManagerList = new ArrayList<NotifygruMappingManager>(  );
+        List<NotifygruMappingManager> notifygruMappingManagerList = new ArrayList<NotifygruMappingManager>( );
         DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL, plugin );
-        daoUtil.executeQuery(  );
+        daoUtil.executeQuery( );
 
-        while ( daoUtil.next(  ) )
+        while ( daoUtil.next( ) )
         {
-            NotifygruMappingManager notifygruMappingManager = new NotifygruMappingManager(  );
+            NotifygruMappingManager notifygruMappingManager = new NotifygruMappingManager( );
             int nIndex = 1;
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
-                notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
-                notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
-                notifygruMappingManager.setFixedPhoneNumber( daoUtil.getInt( nIndex++ ) );
-                notifygruMappingManager.setEmail( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
+            notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setFixedPhoneNumber( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setEmail( daoUtil.getInt( nIndex++ ) );
 
             notifygruMappingManagerList.add( notifygruMappingManager );
         }
@@ -213,23 +214,23 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         daoUtil.free( );
         return notifygruMappingManagerList;
     }
-    
+
     /**
      * {@inheritDoc }
      */
     @Override
     public List<Integer> selectIdNotifygruMappingManagersList( Plugin plugin )
     {
-            List<Integer> notifygruMappingManagerList = new ArrayList<Integer>( );
-            DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
-            daoUtil.executeQuery(  );
+        List<Integer> notifygruMappingManagerList = new ArrayList<Integer>( );
+        DAOUtil daoUtil = new DAOUtil( SQL_QUERY_SELECTALL_ID, plugin );
+        daoUtil.executeQuery( );
 
-            while ( daoUtil.next(  ) )
-            {
-                notifygruMappingManagerList.add( daoUtil.getInt( 1 ) );
-            }
+        while ( daoUtil.next( ) )
+        {
+            notifygruMappingManagerList.add( daoUtil.getInt( 1 ) );
+        }
 
-            daoUtil.free( );
-            return notifygruMappingManagerList;
+        daoUtil.free( );
+        return notifygruMappingManagerList;
     }
 }
