@@ -75,6 +75,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String PARAMS_REQUEST_EMAIL = "email";
     private static final String PARAMS_REQUEST_MOBILE_PHONE_NUMBER = "mobilephonenumber";
     private static final String PARAMS_REQUEST_FIXED_PHONE_NUMBER = "fixedphonenumber";
+    private static final String PARAMS_REQUEST_DEMANDETYPE = "demandetype";
 
     // Properties for page titles
     private static final String PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "modulenotifygrumappingmanager.manage_notifygrumappingmanagers.pageTitle";
@@ -210,6 +211,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
         _notifygrumappingmanager.setEmail( Integer.parseInt( request.getParameter( PARAMS_REQUEST_EMAIL ) ) );
         _notifygrumappingmanager.setMobilePhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_MOBILE_PHONE_NUMBER ) ) );
         _notifygrumappingmanager.setFixedPhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_FIXED_PHONE_NUMBER ) ) );
+        _notifygrumappingmanager.setDemandeTypeId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_DEMANDETYPE ) ) );
 
     }
 

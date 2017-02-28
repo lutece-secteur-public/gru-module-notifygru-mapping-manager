@@ -24,6 +24,7 @@
             <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnMobilePhoneNumber}</th>
             <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnFixedPhoneNumber}</th>
             <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnEmail}</th>
+            <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnDemandeType}</th>
             <th>#i18n{portal.util.labelActions}</th>
         </tr>
         <@tableHeadBodySeparator />
@@ -41,6 +42,9 @@
             </td>
             <td>
                 ${notifygrumappingmanager.email}
+            </td>
+            <td>
+                ${notifygrumappingmanager.demandeTypeId}
             </td>
         <td>
             <a href="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp?view=modifyNotifygruMappingManager&id=${notifygrumappingmanager.id}"

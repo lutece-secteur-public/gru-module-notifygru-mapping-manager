@@ -66,6 +66,7 @@ public class NotifygruMappingManagerRest
     private static final String KEY_MOBILEPHONENUMBER = "mobilephonenumber";
     private static final String KEY_FIXEDPHONENUMBER = "fixedphonenumber";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_DEMANDETYPE = "demandetype";
     private static final String KEY_FORM = "form";
     private static final String KEY_FORM_VALUE = "formValue";
 
@@ -125,6 +126,7 @@ public class NotifygruMappingManagerRest
         jsonNotifygruMappingManager.accumulate( KEY_MOBILEPHONENUMBER, notifygrumappingmanager.getMobilePhoneNumber( ) );
         jsonNotifygruMappingManager.accumulate( KEY_FIXEDPHONENUMBER, notifygrumappingmanager.getFixedPhoneNumber( ) );
         jsonNotifygruMappingManager.accumulate( KEY_EMAIL, notifygrumappingmanager.getEmail( ) );
+        jsonNotifygruMappingManager.accumulate( KEY_DEMANDETYPE, notifygrumappingmanager.getDemandeTypeId( ) );
         json.accumulate( KEY_FORM_VALUE, jsonNotifygruMappingManager );
     }
 

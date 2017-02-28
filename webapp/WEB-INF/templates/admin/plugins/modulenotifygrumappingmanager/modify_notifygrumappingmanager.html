@@ -11,7 +11,10 @@
                         inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>                        
 <@comboSiteWithParams name="beankey"   default_value="${notifygrumappingmanager.beanKey}"   additionalParameters='id="beankey"  '  items=list_provider    />
 </@fieldInputWrapper>
-          
+
+<@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelDemandeType" 
+                        i18nHelpBlockKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelDemandeType.help"
+                        inputName="demandetype" mandatory=true value="${notifygrumappingmanager.demandeTypeId}" cssClass='form-control' />
 
           
 <@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelMobilePhoneNumber" 

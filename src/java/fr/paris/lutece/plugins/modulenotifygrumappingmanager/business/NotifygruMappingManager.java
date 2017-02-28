@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
-import javax.persistence.Column;
 import javax.validation.constraints.*;
 
 import org.hibernate.validator.constraints.*;
@@ -59,6 +58,8 @@ public class NotifygruMappingManager implements Serializable
     private int _nFixedPhoneNumber;
 
     private int _nEmail;
+
+    private int _nDemandeTypeId;
 
     /**
      * Returns the Id
@@ -163,5 +164,22 @@ public class NotifygruMappingManager implements Serializable
     public void setEmail( int nEmail )
     {
         _nEmail = nEmail;
+    }
+
+    /**
+     * @return the DemandeTypeId
+     */
+    public int getDemandeTypeId( )
+    {
+        return _nDemandeTypeId;
+    }
+
+    /**
+     * @param nDemandeTypeId
+     *            the DemandeTypeId to set
+     */
+    public void setDemandeTypeId( int nDemandeTypeId )
+    {
+        this._nDemandeTypeId = nDemandeTypeId;
     }
 }
