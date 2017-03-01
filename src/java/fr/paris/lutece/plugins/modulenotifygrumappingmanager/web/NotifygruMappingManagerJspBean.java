@@ -39,6 +39,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
+
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManager;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManagerHome;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.service.NotifygruMappingManagerService;
@@ -211,7 +213,16 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
         _notifygrumappingmanager.setEmail( Integer.parseInt( request.getParameter( PARAMS_REQUEST_EMAIL ) ) );
         _notifygrumappingmanager.setMobilePhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_MOBILE_PHONE_NUMBER ) ) );
         _notifygrumappingmanager.setFixedPhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_FIXED_PHONE_NUMBER ) ) );
-        _notifygrumappingmanager.setDemandeTypeId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_DEMANDETYPE ) ) );
+        
+        try
+        {
+        	_notifygrumappingmanager.setDemandeTypeId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_DEMANDETYPE ) ) );
+        }
+        catch( NumberFormatException nfe )
+        {
+        	_notifygrumappingmanager.setDemandeTypeId( 0 );
+        	AppLogService.info( "Unable to parse entered value for integer DemandTypeId. Value set to 0" );
+        }
 
     }
 
