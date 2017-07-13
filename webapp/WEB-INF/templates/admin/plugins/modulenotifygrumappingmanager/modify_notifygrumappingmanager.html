@@ -23,7 +23,8 @@
 <@comboSiteWithParams name="mobilephonenumber"   default_value="${notifygrumappingmanager.mobilePhoneNumber}"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
 </@fieldInputWrapper>
 
-
+<@comboWithParameters name="mobilephonenumber"   default_value="1"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
+</@fieldInputWrapper>
 
 
                  
@@ -31,7 +32,7 @@
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelFixedPhoneNumber.help"
                         inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="fixedphonenumber"   default_value="${notifygrumappingmanager.fixedPhoneNumber}"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
+<@comboWithParameters name="fixedphonenumber"   default_value="${notifygrumappingmanager.fixedPhoneNumber}"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
 </@fieldInputWrapper>
 
 
@@ -42,7 +43,7 @@
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.modify_notifygrumappingmanager.labelEmail.help"
                         inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="email"   default_value="${notifygrumappingmanager.email}"   additionalParameters='id="email"'  items=list_position    />
+<@comboWithParameters name="email"   default_value="${notifygrumappingmanager.email}"   additionalParameters='id="email"'  items=list_position    />
 </@fieldInputWrapper>
   
       
@@ -52,3 +53,14 @@
     </form>
 </@rowBoxHeader>
 
+<#macro comboWithParameters name default_value additionalParameters items >
+	<select id="${name}" name="${name}" ${additionalParameters} >
+		<#list items as item>
+			<#if default_value="${item.code}">
+				<option selected="selected" value="${item.code}" >${item.name!}</option>
+		   	<#else>
+		   		<option value="${item.code}" ><#if item.name??>${item.name!}<#else>Commentaire</#if></option>
+		   	</#if>
+		</#list>
+	</select>
+</#macro>
