@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2017, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,8 +39,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
-
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManager;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManagerHome;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.service.NotifygruMappingManagerService;
@@ -66,6 +64,11 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     // //////////////////////////////////////////////////////////////////////////
     // Constants
 
+    /**
+     * Generated serial ID
+     */
+    private static final long serialVersionUID = 230502602226206951L;
+
     // templates
     private static final String TEMPLATE_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "/admin/plugins/modulenotifygrumappingmanager/manage_notifygrumappingmanagers.html";
     private static final String TEMPLATE_CREATE_NOTIFYGRUMAPPINGMANAGER = "/admin/plugins/modulenotifygrumappingmanager/create_notifygrumappingmanager.html";
@@ -75,9 +78,12 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER = "id";
     private static final String PARAMS_REQUEST_BEAN_KEY = "beankey";
     private static final String PARAMS_REQUEST_EMAIL = "email";
+    private static final String PARAMS_REQUEST_CONNECTION_ID = "connectionid";
+    private static final String PARAMS_REQUEST_CUSTOMER_ID = "customerid";
     private static final String PARAMS_REQUEST_MOBILE_PHONE_NUMBER = "mobilephonenumber";
     private static final String PARAMS_REQUEST_FIXED_PHONE_NUMBER = "fixedphonenumber";
     private static final String PARAMS_REQUEST_DEMANDETYPE = "demandetype";
+    private static final String PARAMS_REQUEST_DEMAND_REFERENCE = "demandreference";
 
     // Properties for page titles
     private static final String PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "modulenotifygrumappingmanager.manage_notifygrumappingmanagers.pageTitle";
@@ -89,6 +95,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String MARK_NOTIFYGRUMAPPINGMANAGER = "notifygrumappingmanager";
     private static final String MARK_NOTIFYGRU_FORM_LIST_PROVIDER = "list_provider";
     private static final String MARK_NOTIFYGRU_FORM_LIST_POSITION = "list_position";
+    private static final String MARK_NOTIFYGRU_FORM_CURRENT_BEAN_KEY = "beankey";
     private static final String MARK_BASE_URL = "BASE_URL";
     private static final String MARK_KEY_AJAX = "AJAX_KEY";
 
@@ -148,13 +155,32 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     {
         _notifygrumappingmanager = ( _notifygrumappingmanager != null ) ? _notifygrumappingmanager : new NotifygruMappingManager( );
 
+        ReferenceList referenceListBean = NotifygruMappingManagerService.getListProvider( );
+        String strCurrentBeanKey = request.getParameter( PARAMS_REQUEST_BEAN_KEY );
+
         Map<String, Object> model = getModel( );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _notifygrumappingmanager );
-        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, NotifygruMappingManagerService.getListProvider( ) );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean );
+
+        ReferenceList listPosition = new ReferenceList( );
+
+        if ( strCurrentBeanKey != null )
+        {
+            listPosition = NotifygruMappingManagerService.getMappingPropertiesOfProvider( strCurrentBeanKey );
+        }
+        else
+        {
+            if ( !referenceListBean.isEmpty( ) )
+            {
+                listPosition = NotifygruMappingManagerService.getMappingPropertiesOfProvider( referenceListBean.get( 0 ).getCode( ) );
+                strCurrentBeanKey = referenceListBean.get( 0 ).getCode( );
+            }
+        }
 
         UrlItem url = new UrlItem( AppPathService.getBaseUrl( request ) );
 
-        model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, new ReferenceList( ) );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, listPosition );
+        model.put( MARK_NOTIFYGRU_FORM_CURRENT_BEAN_KEY, strCurrentBeanKey );
         model.put( MARK_BASE_URL, url );
         model.put( MARK_KEY_AJAX, Constants.KEY_BEAN );
 
@@ -211,17 +237,20 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
 
         _notifygrumappingmanager.setBeanKey( request.getParameter( PARAMS_REQUEST_BEAN_KEY ) );
         _notifygrumappingmanager.setEmail( Integer.parseInt( request.getParameter( PARAMS_REQUEST_EMAIL ) ) );
+        _notifygrumappingmanager.setConnectionId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_CONNECTION_ID ) ) );
+        _notifygrumappingmanager.setCustomerId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_CUSTOMER_ID ) ) );
         _notifygrumappingmanager.setMobilePhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_MOBILE_PHONE_NUMBER ) ) );
         _notifygrumappingmanager.setFixedPhoneNumber( Integer.parseInt( request.getParameter( PARAMS_REQUEST_FIXED_PHONE_NUMBER ) ) );
-        
+        _notifygrumappingmanager.setDemandReference( Integer.parseInt( request.getParameter( PARAMS_REQUEST_DEMAND_REFERENCE ) ) );
+
         try
         {
-        	_notifygrumappingmanager.setDemandeTypeId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_DEMANDETYPE ) ) );
+            _notifygrumappingmanager.setDemandeTypeId( Integer.parseInt( request.getParameter( PARAMS_REQUEST_DEMANDETYPE ) ) );
         }
         catch( NumberFormatException nfe )
         {
-        	_notifygrumappingmanager.setDemandeTypeId( 0 );
-        	AppLogService.info( "Unable to parse entered value for integer DemandTypeId. Value set to 0" );
+            _notifygrumappingmanager.setDemandeTypeId( 0 );
+            AppLogService.info( "Unable to parse entered value for integer DemandTypeId. Value set to 0" );
         }
 
     }

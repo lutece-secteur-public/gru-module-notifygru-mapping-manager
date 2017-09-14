@@ -21,10 +21,13 @@
         <tr>
             <input type="hidden" id="id" name="id"/>
             <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnBeanKey}</th>
+            <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnDemandeType}</th>
+            <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnConnectionId}</th>
+            <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnCustomerId}</th>
             <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnMobilePhoneNumber}</th>
             <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnFixedPhoneNumber}</th>
             <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnEmail}</th>
-            <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnDemandeType}</th>
+            <th>#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.columnDemandReference}</th>
             <th>#i18n{portal.util.labelActions}</th>
         </tr>
         <@tableHeadBodySeparator />
@@ -33,6 +36,15 @@
             <input type="hidden" id="id" name="id"/>
             <td>
                 ${notifygrumappingmanager.beanKey}
+            </td>
+            <td>
+                ${notifygrumappingmanager.demandeTypeId}
+            </td>
+            <td>
+                ${notifygrumappingmanager.connectionId}
+            </td>
+            <td>
+                ${notifygrumappingmanager.customerId}
             </td>
             <td>
                 ${notifygrumappingmanager.mobilePhoneNumber}
@@ -44,7 +56,7 @@
                 ${notifygrumappingmanager.email}
             </td>
             <td>
-                ${notifygrumappingmanager.demandeTypeId}
+                ${notifygrumappingmanager.demandReference}
             </td>
         <td>
             <a href="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp?view=modifyNotifygruMappingManager&id=${notifygrumappingmanager.id}"

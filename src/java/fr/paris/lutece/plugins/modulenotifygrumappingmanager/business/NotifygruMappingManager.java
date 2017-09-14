@@ -53,6 +53,10 @@ public class NotifygruMappingManager implements Serializable
     @Size( max = 255, message = "#i18n{modulenotifygrumappingmanager.validation.notifygrumappingmanager.BeanKey.size}" )
     private String _strBeanKey;
 
+    private int _nConnectionId;
+
+    private int _nCustomerId;
+
     private int _nMobilePhoneNumber;
 
     private int _nFixedPhoneNumber;
@@ -60,6 +64,8 @@ public class NotifygruMappingManager implements Serializable
     private int _nEmail;
 
     private int _nDemandeTypeId;
+
+    private int _nDemandReference;
 
     /**
      * Returns the Id
@@ -101,6 +107,48 @@ public class NotifygruMappingManager implements Serializable
     public void setBeanKey( String strBeanKey )
     {
         _strBeanKey = strBeanKey;
+    }
+
+    /**
+     * Returns the ConnectionId
+     * 
+     * @return The ConnectionId
+     */
+    public int getConnectionId( )
+    {
+        return _nConnectionId;
+    }
+
+    /**
+     * Sets the ConnectionId
+     * 
+     * @param nConnectionId
+     *            The ConnectionId
+     */
+    public void setConnectionId( int nConnectionId )
+    {
+        _nConnectionId = nConnectionId;
+    }
+
+    /**
+     * Returns the CustomerId
+     * 
+     * @return The CustomerId
+     */
+    public int getCustomerId( )
+    {
+        return _nCustomerId;
+    }
+
+    /**
+     * Sets the CustomerId
+     * 
+     * @param nCustomerId
+     *            The CustomerId
+     */
+    public void setCustomerId( int nCustomerId )
+    {
+        _nCustomerId = nCustomerId;
     }
 
     /**
@@ -181,5 +229,22 @@ public class NotifygruMappingManager implements Serializable
     public void setDemandeTypeId( int nDemandeTypeId )
     {
         this._nDemandeTypeId = nDemandeTypeId;
+    }
+
+    /**
+     * @return the DemandReference
+     */
+    public int getDemandReference( )
+    {
+        return _nDemandReference;
+    }
+
+    /**
+     * @param nDemandReference
+     *            the DemandReference to set
+     */
+    public void setDemandReference( int nDemandReference )
+    {
+        _nDemandReference = nDemandReference;
     }
 }

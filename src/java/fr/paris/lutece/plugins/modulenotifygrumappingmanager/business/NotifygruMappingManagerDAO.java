@@ -48,12 +48,12 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
 {
     // Constants
     private static final String SQL_QUERY_NEW_PK = "SELECT max( id_notifygrumappingmanager ) FROM workflow_task_notify_gru_mapping_manager";
-    private static final String SQL_QUERY_SELECT = "SELECT id_notifygrumappingmanager, beanKey, mobilePhoneNumber, fixedPhoneNumber, email, demandetype FROM workflow_task_notify_gru_mapping_manager WHERE id_notifygrumappingmanager = ?";
-    private static final String SQL_QUERY_SELECT_BY_KEY = "SELECT id_notifygrumappingmanager, beanKey, mobilePhoneNumber, fixedPhoneNumber, email, demandetype FROM workflow_task_notify_gru_mapping_manager WHERE beanKey = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO workflow_task_notify_gru_mapping_manager ( id_notifygrumappingmanager, beanKey, mobilePhoneNumber, fixedPhoneNumber, email, demandetype ) VALUES ( ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_SELECT = "SELECT id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference FROM workflow_task_notify_gru_mapping_manager WHERE id_notifygrumappingmanager = ?";
+    private static final String SQL_QUERY_SELECT_BY_KEY = "SELECT id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference FROM workflow_task_notify_gru_mapping_manager WHERE beanKey = ?";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO workflow_task_notify_gru_mapping_manager ( id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM workflow_task_notify_gru_mapping_manager WHERE id_notifygrumappingmanager = ? ";
-    private static final String SQL_QUERY_UPDATE = "UPDATE workflow_task_notify_gru_mapping_manager SET id_notifygrumappingmanager = ?, beanKey = ?, mobilePhoneNumber = ?, fixedPhoneNumber = ?, email = ?, demandetype = ? WHERE id_notifygrumappingmanager = ?";
-    private static final String SQL_QUERY_SELECTALL = "SELECT id_notifygrumappingmanager, beanKey, mobilePhoneNumber, fixedPhoneNumber, email, demandetype FROM workflow_task_notify_gru_mapping_manager";
+    private static final String SQL_QUERY_UPDATE = "UPDATE workflow_task_notify_gru_mapping_manager SET id_notifygrumappingmanager = ?, beanKey = ?, connection_id = ?, customer_id = ?,  mobilePhoneNumber = ?, fixedPhoneNumber = ?, email = ?, demandetype = ?, demand_reference = ? WHERE id_notifygrumappingmanager = ?";
+    private static final String SQL_QUERY_SELECTALL = "SELECT id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference FROM workflow_task_notify_gru_mapping_manager";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_notifygrumappingmanager FROM workflow_task_notify_gru_mapping_manager";
 
     /**
@@ -94,10 +94,13 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         daoUtil.setInt( nIndex++, notifygruMappingManager.getId( ) );
 
         daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getConnectionId( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getDemandeTypeId( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getDemandReference( ) );
 
         daoUtil.executeUpdate( );
         daoUtil.free( );
@@ -121,10 +124,13 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
             notifygruMappingManager = new NotifygruMappingManager( );
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
+            notifygruMappingManager.setConnectionId( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setCustomerId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setFixedPhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setEmail( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setDemandeTypeId( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setDemandReference( daoUtil.getInt( nIndex++ ) );
         }
 
         daoUtil.free( );
@@ -149,10 +155,13 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
             notifygruMappingManager = new NotifygruMappingManager( );
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
+            notifygruMappingManager.setConnectionId( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setCustomerId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setFixedPhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setEmail( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setDemandeTypeId( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setDemandReference( daoUtil.getInt( nIndex++ ) );
         }
 
         daoUtil.free( );
@@ -182,10 +191,13 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
         int nIndex = 1;
         daoUtil.setInt( nIndex++, notifygruMappingManager.getId( ) );
         daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getConnectionId( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getCustomerId( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getMobilePhoneNumber( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getFixedPhoneNumber( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getEmail( ) );
         daoUtil.setInt( nIndex++, notifygruMappingManager.getDemandeTypeId( ) );
+        daoUtil.setInt( nIndex++, notifygruMappingManager.getDemandReference( ) );
         daoUtil.setInt( nIndex, notifygruMappingManager.getId( ) );
 
         daoUtil.executeUpdate( );
@@ -208,10 +220,13 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
             int nIndex = 1;
             notifygruMappingManager.setId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setBeanKey( daoUtil.getString( nIndex++ ) );
+            notifygruMappingManager.setConnectionId( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setCustomerId( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setMobilePhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setFixedPhoneNumber( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setEmail( daoUtil.getInt( nIndex++ ) );
             notifygruMappingManager.setDemandeTypeId( daoUtil.getInt( nIndex++ ) );
+            notifygruMappingManager.setDemandReference( daoUtil.getInt( nIndex++ ) );
 
             notifygruMappingManagerList.add( notifygruMappingManager );
         }

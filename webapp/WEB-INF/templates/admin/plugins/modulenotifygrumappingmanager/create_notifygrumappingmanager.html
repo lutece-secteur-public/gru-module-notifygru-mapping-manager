@@ -4,27 +4,50 @@
 <@rowBoxHeader i18nTitleKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.pageTitle">
     <form class="form-horizontal" method="post" name="create_notifygrumappingmanager" action="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp">
         <@messages errors=errors />
-        <input type="hidden" id="id" name="id"/>
+        <input type="hidden" name="view" value="createNotifygruMappingManager"/>
     
-    
-
 <@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey" 
                         i18nHelpBlockKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey.help"
                         inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="beankey"   default_value="1"   additionalParameters='id="beankey" onChange="loadForm()"  '  items=list_provider    />
+<@comboWithParams name="beankey"   default_value="${beankey}"   additionalParameters='id="beankey" onChange="submit()"  '  items=list_provider    />
 </@fieldInputWrapper>
+    </form>
+
+    <form class="form-horizontal" method="post" name="create_notifygrumappingmanager" action="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp">
+        <input type="hidden" name="beankey" value="${beankey}"/>
 
 <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType" 
                         i18nHelpBlockKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType.help"
                         inputName="demandetype" mandatory=true value="0" cssClass='form-control' />          
           
           
+<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandReference"
+                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandReference.help"
+                        inputName="demandreference"   mandatory=true   value="0"  cssClass='form-control'>
+
+<@comboWithParams name="demandreference"   default_value="1"   additionalParameters='id="demandreference"'  items=list_position    />
+</@fieldInputWrapper>
+
+<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelConnectionId"
+                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelConnectionId.help"
+                        inputName="connectionid"   mandatory=true   value="0"  cssClass='form-control'>
+
+<@comboWithParams name="connectionid"   default_value="1"   additionalParameters='id="connectionid"'  items=list_position    />
+</@fieldInputWrapper>
+
+<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelCustomerId"
+                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelCustomerId.help"
+                        inputName="customerid"   mandatory=true   value="0"  cssClass='form-control'>
+
+<@comboWithParams name="customerid"   default_value="1"   additionalParameters='id="customerid"'  items=list_position    />
+</@fieldInputWrapper>
+
 <@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber" 
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber.help"
                         inputName="mobilephonenumber"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="mobilephonenumber"   default_value="1"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
+<@comboWithParams name="mobilephonenumber"   default_value="1"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
 </@fieldInputWrapper>
 
     
@@ -34,7 +57,7 @@
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber.help"
                         inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="fixedphonenumber"   default_value="1"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
+<@comboWithParams name="fixedphonenumber"   default_value="1"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
 </@fieldInputWrapper>
 
        
@@ -44,7 +67,7 @@
                         i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelEmail.help"
                         inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboSiteWithParams name="email"   default_value="1"   additionalParameters='id="email"'  items=list_position    />
+<@comboWithParams name="email"   default_value="1"   additionalParameters='id="email"'  items=list_position    />
 </@fieldInputWrapper>
   
         
@@ -56,73 +79,3 @@
         <@actionButtons button1Name="action_createNotifygruMappingManager" button2Name="view_manageNotifygruMappingManagers"/>
     </form>
 </@rowBoxHeader>
-
-
-<script type="text/javascript">
-
-
-
-
-
-window.onload =  loadForm();
-	
-	
-	function loadForm()
-{
-
-	var strkey = $('#beankey').val()
-	
-//console.log("${BASE_URL}")
-
-    $.ajax({
-          type: 'POST',
-          url: '${BASE_URL}rest/modulenotifygrumappingmanager/notifygrumappingmanager',
-          headers: {              
-              'Content-Type':'application/json'
-          },
-          dataType: 'json',
-          data: {"${AJAX_KEY}": strkey},
-          timeout: 20000,
-          success: function (data) {
-
-
-    var form = (data.form!==undefined) ? data.form:{};
-    var formValue = (data.formValue!==undefined) ? data.formValue:{};
-    
-  var OptionForm="";
-    $.each(form,function(position,title){
-    	
-    	OptionForm+="<option value="+position+"> "+title+" </option>";
-    });
-
-    
-    $("#mobilephonenumber").html(OptionForm);
-    $("#fixedphonenumber").html(OptionForm);
-    $("#email").html(OptionForm);
-    
-   $.each(formValue,function(title,position){
-    	
-    	$("#"+title).val(position);
-    });
-    
-          },
-          error: function (request) {
-
-    
-console.log("errror du webservidse")
-          }
-
-
-
-
-
-      });  
-	
-
-
-}
-
-
-	
-	
-</script>
