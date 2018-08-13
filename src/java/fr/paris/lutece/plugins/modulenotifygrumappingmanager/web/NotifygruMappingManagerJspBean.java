@@ -136,9 +136,11 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     public String getManageNotifygruMappingManagers( HttpServletRequest request )
     {
         _notifygrumappingmanager = null;
+        ReferenceList referenceListBean = NotifygruMappingManagerService.getListProvider( );
         List<NotifygruMappingManager> listNotifygruMappingManagers = NotifygruMappingManagerHome.getNotifygruMappingManagersList( );
         Map<String, Object> model = getPaginatedListModel( request, MARK_NOTIFYGRUMAPPINGMANAGER_LIST, listNotifygruMappingManagers,
                 JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
+        model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean.toMap() );
 
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, TEMPLATE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, model );
     }
