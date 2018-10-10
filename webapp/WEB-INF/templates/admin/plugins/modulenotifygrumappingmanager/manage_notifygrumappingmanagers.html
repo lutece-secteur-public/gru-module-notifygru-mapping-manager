@@ -1,4 +1,18 @@
 <#include "managemodulenotifygrumappingmanager_tabs.html" />
+
+<#function getLabelFromPosition positionRefList code>
+    <#list positionRefList as item>
+        <#if item.code == code?string>
+            <#return item.name>
+        </#if>
+    </#list>
+    <#if code??>
+        <#return code>
+    <#else>
+        <#return ''>
+    </#if>
+</#function>
+
 <@tabs tab="notifygrumappingmanager" />
 
 <@rowBox>
@@ -32,6 +46,7 @@
         </tr>
         <@tableHeadBodySeparator />
             <#list notifygrumappingmanager_list as notifygrumappingmanager >
+            <#assign listPosition = mapPositionLabel[notifygrumappingmanager.beanKey]>
         <tr>
             <input type="hidden" id="id" name="id"/>
             <td>
@@ -41,22 +56,22 @@
                 ${notifygrumappingmanager.demandeTypeId}
             </td>
             <td>
-                ${notifygrumappingmanager.connectionId}
+                ${getLabelFromPosition(listPosition,notifygrumappingmanager.connectionId)}
             </td>
             <td>
-                ${notifygrumappingmanager.customerId}
+                ${getLabelFromPosition(listPosition,notifygrumappingmanager.customerId)}
             </td>
             <td>
-                ${notifygrumappingmanager.mobilePhoneNumber}
+                ${getLabelFromPosition(listPosition,notifygrumappingmanager.mobilePhoneNumber)}
             </td>
             <td>
-                ${notifygrumappingmanager.fixedPhoneNumber}
+                ${getLabelFromPosition(listPosition,notifygrumappingmanager.fixedPhoneNumber)}
             </td>
             <td>
-                ${notifygrumappingmanager.email}
+                ${getLabelFromPosition(listPosition,notifygrumappingmanager.email)}
             </td>
             <td>
-                ${notifygrumappingmanager.demandReference}
+                ${getLabelFromPosition(listPosition,notifygrumappingmanager.demandReference)}
             </td>
         <td>
             <a href="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp?view=modifyNotifygruMappingManager&id=${notifygrumappingmanager.id}"

@@ -10,12 +10,12 @@
                         i18nHelpBlockKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey.help"
                         inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>
                         
-<@comboWithParams name="beankey"   default_value="${beankey}"   additionalParameters='id="beankey" onChange="submit()"  '  items=list_provider    />
+<@comboWithParams name="beankey"   default_value="${beankey!''}"   additionalParameters='id="beankey" onChange="submit()"  '  items=list_provider    />
 </@fieldInputWrapper>
     </form>
 
     <form class="form-horizontal" method="post" name="create_notifygrumappingmanager" action="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp">
-        <input type="hidden" name="beankey" value="${beankey}"/>
+        <input type="hidden" name="beankey" value="${beankey!''}"/>
 
 <@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType" 
                         i18nHelpBlockKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType.help"

@@ -53,6 +53,7 @@ import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
 import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.url.UrlItem;
+import java.util.HashMap;
 
 /**
  * This class provides the user interface to manage NotifygruMappingManager features ( manage, create, modify, remove )
@@ -98,6 +99,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String MARK_NOTIFYGRU_FORM_CURRENT_BEAN_KEY = "beankey";
     private static final String MARK_BASE_URL = "BASE_URL";
     private static final String MARK_KEY_AJAX = "AJAX_KEY";
+    private static final String MARK_NOTIFYGRU_FORM_MAP_POSITION_LABEL = "mapPositionLabel";
 
     private static final String JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp";
 
@@ -138,10 +140,21 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
         _notifygrumappingmanager = null;
         ReferenceList referenceListBean = NotifygruMappingManagerService.getListProvider( );
         List<NotifygruMappingManager> listNotifygruMappingManagers = NotifygruMappingManagerHome.getNotifygruMappingManagersList( );
+        
+        //Fill a map with correspondances between fields position and fields name for all the provider
+        Map<String,ReferenceList> mapBeanListPosition = new HashMap<>();
+        for ( NotifygruMappingManager notifyGruMappingManager : listNotifygruMappingManagers )
+        {
+            if ( !referenceListBean.isEmpty( ) )
+            {
+                mapBeanListPosition.put( notifyGruMappingManager.getBeanKey(), NotifygruMappingManagerService.getMappingPropertiesOfProvider( notifyGruMappingManager.getBeanKey() ) );
+            }
+        }
+        
         Map<String, Object> model = getPaginatedListModel( request, MARK_NOTIFYGRUMAPPINGMANAGER_LIST, listNotifygruMappingManagers,
                 JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
         model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean.toMap() );
-
+        model.put( MARK_NOTIFYGRU_FORM_MAP_POSITION_LABEL, mapBeanListPosition );
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, TEMPLATE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, model );
     }
 
