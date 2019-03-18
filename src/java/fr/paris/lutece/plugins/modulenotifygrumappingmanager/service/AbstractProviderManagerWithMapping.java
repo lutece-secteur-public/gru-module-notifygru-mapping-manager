@@ -33,10 +33,11 @@
  */
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.service;
 
+import fr.paris.lutece.plugins.workflowcore.service.provider.AbstractProviderManager;
+import fr.paris.lutece.plugins.workflowcore.service.provider.ProviderDescription;
 import java.util.Collection;
 
-import fr.paris.lutece.plugins.workflow.modules.notifygru.service.provider.AbstractProviderManager;
-import fr.paris.lutece.plugins.workflow.modules.notifygru.service.provider.ProviderDescription;
+
 import fr.paris.lutece.util.ReferenceList;
 
 /**
