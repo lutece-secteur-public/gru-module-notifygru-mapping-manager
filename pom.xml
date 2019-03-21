@@ -10,7 +10,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>plugin-modulenotifygrumappingmanager</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <name>Lutece modulenotifygrumappingmanager plugin</name>
 
     <repositories>
@@ -64,6 +64,6 @@
         <connection>scm:git:https://github.com/lutece-secteur-public/gru-module-notifygru-mapping-manager.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-secteur-public/gru-module-notifygru-mapping-manager.git</developerConnection>
         <url>https://github.com/lutece-secteur-public/gru-module-notifygru-mapping-manager.git</url>
-      <tag>HEAD</tag>
+      <tag>plugin-modulenotifygrumappingmanager-1.0.4</tag>
   </scm>
 </project>
