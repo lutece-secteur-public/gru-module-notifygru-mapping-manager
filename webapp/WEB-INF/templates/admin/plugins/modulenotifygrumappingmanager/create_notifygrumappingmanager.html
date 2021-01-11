@@ -1,81 +1,46 @@
 <#include "managemodulenotifygrumappingmanager_tabs.html" />
-<@tabs tab="notifygrumappingmanager" />
+<@mappingmanager_tabs tab="notifygrumappingmanager">
+	<@fieldSet legend='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.pageTitle}'>
+		<@tform method='post' name='create_notifygrumappingmanager' action='jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp'>
+			<@messages errors=errors />
+			<@input type='hidden' name='view' value='createNotifygruMappingManager' />
+			<@formGroup labelFor='beankey' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey.help}' mandatory=true>
+				<@select name='beankey' default_value='${beankey!\'\'}'  params='onChange="submit()"' items=list_provider />
+			</@formGroup>
+		</@tform>
 
-<@rowBoxHeader i18nTitleKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.pageTitle">
-    <form class="form-horizontal" method="post" name="create_notifygrumappingmanager" action="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp">
-        <@messages errors=errors />
-        <input type="hidden" name="view" value="createNotifygruMappingManager"/>
-    
-<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey" 
-                        i18nHelpBlockKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey.help"
-                        inputName="beankey"   mandatory=true   value="0"  cssClass='form-control'>
-                        
-<@comboWithParams name="beankey"   default_value="${beankey!''}"   additionalParameters='id="beankey" onChange="submit()"  '  items=list_provider    />
-</@fieldInputWrapper>
-    </form>
-
-    <form class="form-horizontal" method="post" name="create_notifygrumappingmanager" action="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp">
-        <input type="hidden" name="beankey" value="${beankey!''}"/>
-
-<@fieldInputText i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType" 
-                        i18nHelpBlockKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType.help"
-                        inputName="demandetype" mandatory=true value="0" cssClass='form-control' />          
-          
-          
-<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandReference"
-                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandReference.help"
-                        inputName="demandreference"   mandatory=true   value="0"  cssClass='form-control'>
-
-<@comboWithParams name="demandreference"   default_value="1"   additionalParameters='id="demandreference"'  items=list_position    />
-</@fieldInputWrapper>
-
-<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelConnectionId"
-                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelConnectionId.help"
-                        inputName="connectionid"   mandatory=true   value="0"  cssClass='form-control'>
-
-<@comboWithParams name="connectionid"   default_value="1"   additionalParameters='id="connectionid"'  items=list_position    />
-</@fieldInputWrapper>
-
-<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelCustomerId"
-                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelCustomerId.help"
-                        inputName="customerid"   mandatory=true   value="0"  cssClass='form-control'>
-
-<@comboWithParams name="customerid"   default_value="1"   additionalParameters='id="customerid"'  items=list_position    />
-</@fieldInputWrapper>
-
-<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber" 
-                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber.help"
-                        inputName="mobilephonenumber"   mandatory=true   value="0"  cssClass='form-control'>
-                        
-<@comboWithParams name="mobilephonenumber"   default_value="1"   additionalParameters='id="mobilephonenumber"'  items=list_position    />
-</@fieldInputWrapper>
-
-    
-       
-                 
-<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber" 
-                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber.help"
-                        inputName="fixedphonenumber"   mandatory=true   value="0"  cssClass='form-control'>
-                        
-<@comboWithParams name="fixedphonenumber"   default_value="1"   additionalParameters='id="fixedphonenumber"  '  items=list_position    />
-</@fieldInputWrapper>
-
-       
-    
-                        
-<@fieldInputWrapper i18nLabelKey="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelEmail" 
-                        i18nHelpBlockKey ="modulenotifygrumappingmanager.create_notifygrumappingmanager.labelEmail.help"
-                        inputName="email"   mandatory=true   value="0"  cssClass='form-control'>
-                        
-<@comboWithParams name="email"   default_value="1"   additionalParameters='id="email"'  items=list_position    />
-</@fieldInputWrapper>
-  
-        
-        
-   
-      
-      
-      
-        <@actionButtons button1Name="action_createNotifygruMappingManager" button2Name="view_manageNotifygruMappingManagers"/>
-    </form>
-</@rowBoxHeader>
+		<@tform method='post' name='create_notifygrumappingmanager' action='jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp'>
+			<@input type='hidden' name='beankey' value='${beankey!\'\'}' />
+			
+			<@formGroup labelFor='demandetype' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandeType.help}' mandatory=true>
+				<@input type='text' name='demandetype' value='0' />
+			</@formGroup>
+			
+			<@formGroup labelFor='demandreference' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandReference}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelDemandReference.help}' mandatory=true>
+				<@select name='demandreference' id='demandreference' default_value='1' items=list_position />
+			</@formGroup>
+			
+			<@formGroup labelFor='connectionid' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelConnectionId}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelConnectionId.help}' mandatory=true>
+				<@select name='connectionid' id='connectionid' default_value='1' items=list_position />
+			</@formGroup>
+			
+			<@formGroup labelFor='customerid' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelCustomerId}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelCustomerId.help}' mandatory=true>
+				<@select name='customerid' id='customerid' default_value='1' items=list_position />
+			</@formGroup>
+			
+			<@formGroup labelFor='mobilephonenumber' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelMobilePhoneNumber.help}' mandatory=true>
+				<@select name='mobilephonenumber' id='mobilephonenumber' default_value='1' items=list_position />
+			</@formGroup>
+			
+			<@formGroup labelFor='fixed' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelFixedPhoneNumber.help}' mandatory=true>
+				<@select name='fixedphonenumber' id='fixedphonenumber' default_value='1' items=list_position />
+			</@formGroup>
+			
+			<@formGroup labelFor='email' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelEmail}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelEmail.help}' mandatory=true>
+				<@select name='email' id='email' default_value='1' items=list_position />
+			</@formGroup>
+			
+			<@actionButtons button1Name='action_createNotifygruMappingManager' button2Name='view_manageNotifygruMappingManagers' />
+		</@tform>
+	</@fieldSet>
+</@mappingmanager_tabs>

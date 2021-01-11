@@ -1,11 +1,11 @@
-<#macro tabs tab >
-<div>
-    <ul class="nav nav-tabs">
-        <li <#if tab="notifygrumappingmanager">class="active"</#if>>
-            <a href="jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp">
-                #i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.pageTitle}
-            </a>
-        </li>
-    </ul>
-</div>
+<#macro mappingmanager_tabs tab>
+	<@tabs>
+		<@tabList>
+			<#if tab='notifygrumappingmanager'><#assign active = true /><#else><#assign active = false /></#if>
+			<@tabLink active=active href='jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp' title='#i18n{modulenotifygrumappingmanager.manage_notifygrumappingmanagers.pageTitle}' />
+		</@tabList>
+		<@tabContent>
+			<#nested>
+		</@tabContent>
+    </@tabs>
 </#macro>
