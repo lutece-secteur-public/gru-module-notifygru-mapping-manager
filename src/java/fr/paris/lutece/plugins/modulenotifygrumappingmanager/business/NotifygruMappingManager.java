@@ -34,8 +34,7 @@
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
 import javax.validation.constraints.*;
-
-import org.hibernate.validator.constraints.*;
+import javax.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 
