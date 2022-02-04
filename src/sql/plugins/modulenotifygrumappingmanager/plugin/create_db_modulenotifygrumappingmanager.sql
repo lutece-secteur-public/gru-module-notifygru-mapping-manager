@@ -5,14 +5,14 @@
 
 DROP TABLE IF EXISTS workflow_task_notify_gru_mapping_manager;
 CREATE TABLE workflow_task_notify_gru_mapping_manager (
-id_notifygrumappingmanager int(6) NOT NULL,
-beankey varchar(255) NOT NULL default '',
-connection_id int(11) NOT NULL default '0',
-customer_id int(11) NOT NULL default '0',
-mobilephonenumber int(11) NOT NULL default '0',
-fixedphonenumber int(11) NOT NULL default '0',
-email int(11) NOT NULL default '0',
-demandetype int(11) NOT NULL default '0',
-demand_reference int(11) NOT NULL default '0',
+id_notifygrumappingmanager int NOT NULL,
+beankey varchar(255) default '' NOT NULL,
+connection_id int default 0 NOT NULL,
+customer_id int default 0 NOT NULL,
+mobilephonenumber int default 0 NOT NULL,
+fixedphonenumber int default 0 NOT NULL,
+email int default 0 NOT NULL,
+demandetype int default 0 NOT NULL,
+demand_reference int default 0 NOT NULL,
 PRIMARY KEY (id_notifygrumappingmanager)
 );
