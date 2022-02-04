@@ -47,6 +47,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class ManageModulenotifygrumappingmanagerJspBean extends MVCAdminJspBean
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1580187436371390192L;
+
     // Right
     public static final String RIGHT_MANAGEMODULENOTIFYGRUMAPPINGMANAGER = "MODULENOTIFYGRUMAPPINGMANAGER_MANAGEMENT";
 
