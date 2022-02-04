@@ -273,11 +273,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private Boolean exitMapping( )
     {
         // not dublicate
-        if ( NotifygruMappingManagerHome.findByPrimaryKey( _notifygrumappingmanager.getBeanKey( ) ) != null )
-        {
-            return true;
-        }
-        return false;
+        return NotifygruMappingManagerHome.findByPrimaryKey( _notifygrumappingmanager.getBeanKey( ) ) != null;
     }
 
     /**
