@@ -37,6 +37,7 @@ package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 import fr.paris.lutece.portal.service.plugin.Plugin;
 import fr.paris.lutece.util.sql.DAOUtil;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,37 +48,13 @@ import java.util.List;
 public final class NotifygruMappingManagerDAO implements INotifygruMappingManagerDAO
 {
     // Constants
-    private static final String SQL_QUERY_NEW_PK = "SELECT max( id_notifygrumappingmanager ) FROM workflow_task_notify_gru_mapping_manager";
     private static final String SQL_QUERY_SELECT = "SELECT id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference FROM workflow_task_notify_gru_mapping_manager WHERE id_notifygrumappingmanager = ?";
     private static final String SQL_QUERY_SELECT_BY_KEY = "SELECT id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference FROM workflow_task_notify_gru_mapping_manager WHERE beanKey = ?";
-    private static final String SQL_QUERY_INSERT = "INSERT INTO workflow_task_notify_gru_mapping_manager ( id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+    private static final String SQL_QUERY_INSERT = "INSERT INTO workflow_task_notify_gru_mapping_manager ( beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ) ";
     private static final String SQL_QUERY_DELETE = "DELETE FROM workflow_task_notify_gru_mapping_manager WHERE id_notifygrumappingmanager = ? ";
     private static final String SQL_QUERY_UPDATE = "UPDATE workflow_task_notify_gru_mapping_manager SET id_notifygrumappingmanager = ?, beanKey = ?, connection_id = ?, customer_id = ?,  mobilePhoneNumber = ?, fixedPhoneNumber = ?, email = ?, demandetype = ?, demand_reference = ? WHERE id_notifygrumappingmanager = ?";
     private static final String SQL_QUERY_SELECTALL = "SELECT id_notifygrumappingmanager, beanKey, connection_id, customer_id, mobilePhoneNumber, fixedPhoneNumber, email, demandetype, demand_reference FROM workflow_task_notify_gru_mapping_manager";
     private static final String SQL_QUERY_SELECTALL_ID = "SELECT id_notifygrumappingmanager FROM workflow_task_notify_gru_mapping_manager";
-
-    /**
-     * Generates a new primary key
-     * 
-     * @param plugin
-     *            The Plugin
-     * @return The new primary key
-     */
-    public int newPrimaryKey( Plugin plugin )
-    {
-        int nKey = 1;
-        try( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_NEW_PK, plugin ) )
-        {
-            daoUtil.executeQuery( );
-    
-            if ( daoUtil.next( ) )
-            {
-                nKey = daoUtil.getInt( 1 ) + 1;
-            }
-        }
-
-        return nKey;
-    }
 
     /**
      * {@inheritDoc }
@@ -85,12 +62,9 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
     @Override
     public void insert( NotifygruMappingManager notifygruMappingManager, Plugin plugin )
     {
-        try( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, plugin ) )
+        try( DAOUtil daoUtil = new DAOUtil( SQL_QUERY_INSERT, Statement.RETURN_GENERATED_KEYS, plugin ) )
         {    
-            notifygruMappingManager.setId( newPrimaryKey( plugin ) );
-    
             int nIndex = 1;
-            daoUtil.setInt( nIndex++, notifygruMappingManager.getId( ) );
     
             daoUtil.setString( nIndex++, notifygruMappingManager.getBeanKey( ) );
             daoUtil.setInt( nIndex++, notifygruMappingManager.getConnectionId( ) );
@@ -102,6 +76,11 @@ public final class NotifygruMappingManagerDAO implements INotifygruMappingManage
             daoUtil.setInt( nIndex++, notifygruMappingManager.getDemandReference( ) );
     
             daoUtil.executeUpdate( );
+
+            if ( daoUtil.nextGeneratedKey( ) )
+            {
+                notifygruMappingManager.setId( daoUtil.getGeneratedKeyInt( 1 ) );
+            }
         }
     }
 
