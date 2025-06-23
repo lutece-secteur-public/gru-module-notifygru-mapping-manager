@@ -1,0 +1,1 @@
+ALTER TABLE workflow_task_notify_gru_mapping_manager MODIFY COLUMN id_notifygrumappingmanager int AUTO_INCREMENT;
