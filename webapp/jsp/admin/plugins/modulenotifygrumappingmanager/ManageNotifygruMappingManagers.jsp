@@ -1,9 +1,9 @@
-<jsp:useBean id="managemodulenotifygrumappingmanagerNotifygruMappingManager" scope="session" class="fr.paris.lutece.plugins.modulenotifygrumappingmanager.web.NotifygruMappingManagerJspBean" />
-<% String strContent = managemodulenotifygrumappingmanagerNotifygruMappingManager.processController ( request , response ); %>
-
 <%@ page errorPage="../../ErrorPage.jsp" %>
+
+${ pageContext.setAttribute( 'strContent', notifygruMappingManagerJspBean.processController( pageContext.request , pageContext.response ) ) }
+
 <jsp:include page="../../AdminHeader.jsp" />
 
-<%= strContent %>
+${ pageContext.getAttribute( 'strContent' ) }
 
 <%@ include file="../../AdminFooter.jsp" %>

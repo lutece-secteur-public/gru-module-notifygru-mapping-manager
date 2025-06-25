@@ -37,19 +37,24 @@ package fr.paris.lutece.plugins.modulenotifygrumappingmanager.web;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManager;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.business.NotifygruMappingManagerHome;
 import fr.paris.lutece.plugins.modulenotifygrumappingmanager.service.NotifygruMappingManagerService;
-import fr.paris.lutece.plugins.modulenotifygrumappingmanager.web.rs.Constants;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPathService;
+import fr.paris.lutece.portal.util.mvc.admin.MVCAdminJspBean;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import fr.paris.lutece.portal.web.util.IPager;
+import fr.paris.lutece.portal.web.util.Pager;
 import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.ReferenceList;
 import fr.paris.lutece.util.url.UrlItem;
@@ -58,8 +63,10 @@ import java.util.HashMap;
 /**
  * This class provides the user interface to manage NotifygruMappingManager features ( manage, create, modify, remove )
  */
+@RequestScoped
+@Named
 @Controller( controllerJsp = "ManageNotifygruMappingManagers.jsp", controllerPath = "jsp/admin/plugins/modulenotifygrumappingmanager/", right = "MODULENOTIFYGRUMAPPINGMANAGER_MANAGEMENT" )
-public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumappingmanagerJspBean
+public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
 {
 
     // //////////////////////////////////////////////////////////////////////////
@@ -90,6 +97,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "modulenotifygrumappingmanager.manage_notifygrumappingmanagers.pageTitle";
     private static final String PROPERTY_PAGE_TITLE_MODIFY_NOTIFYGRUMAPPINGMANAGER = "modulenotifygrumappingmanager.modify_notifygrumappingmanager.pageTitle";
     private static final String PROPERTY_PAGE_TITLE_CREATE_NOTIFYGRUMAPPINGMANAGER = "modulenotifygrumappingmanager.create_notifygrumappingmanager.pageTitle";
+    private static final String PROPERTY_DEFAULT_LIST_ITEM_PER_PAGE = "modulenotifygrumappingmanager.listItems.itemsPerPage";
 
     // Markers
     private static final String MARK_NOTIFYGRUMAPPINGMANAGER_LIST = "notifygrumappingmanager_list";
@@ -98,7 +106,6 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String MARK_NOTIFYGRU_FORM_LIST_POSITION = "list_position";
     private static final String MARK_NOTIFYGRU_FORM_CURRENT_BEAN_KEY = "beankey";
     private static final String MARK_BASE_URL = "BASE_URL";
-    private static final String MARK_KEY_AJAX = "AJAX_KEY";
     private static final String MARK_NOTIFYGRU_FORM_MAP_POSITION_LABEL = "mapPositionLabel";
 
     private static final String JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS = "jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp";
@@ -124,8 +131,11 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     private static final String INFO_NOTIFYGRUMAPPINGMANAGER_UPDATED = "modulenotifygrumappingmanager.info.notifygrumappingmanager.updated";
     private static final String INFO_NOTIFYGRUMAPPINGMANAGER_REMOVED = "modulenotifygrumappingmanager.info.notifygrumappingmanager.removed";
 
-    // Session variable to store working values
     private NotifygruMappingManager _notifygrumappingmanager;
+
+    @Inject
+    @Pager( listBookmark = MARK_NOTIFYGRUMAPPINGMANAGER_LIST, defaultItemsPerPage = PROPERTY_DEFAULT_LIST_ITEM_PER_PAGE )
+    private IPager<NotifygruMappingManager, Void> _pager;
 
     /**
      * Build the Manage View
@@ -137,7 +147,6 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     @View( value = VIEW_MANAGE_NOTIFYGRUMAPPINGMANAGERS, defaultView = true )
     public String getManageNotifygruMappingManagers( HttpServletRequest request )
     {
-        _notifygrumappingmanager = null;
         ReferenceList referenceListBean = NotifygruMappingManagerService.getListProvider( );
         List<NotifygruMappingManager> listNotifygruMappingManagers = NotifygruMappingManagerHome.getNotifygruMappingManagersList( );
         
@@ -151,8 +160,13 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
             }
         }
         
-        Map<String, Object> model = getPaginatedListModel( request, MARK_NOTIFYGRUMAPPINGMANAGER_LIST, listNotifygruMappingManagers,
-                JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
+        UrlItem url = new UrlItem( JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
+        String strUrl = url.getUrl( );
+        
+        _pager.setList( listNotifygruMappingManagers );
+        _pager.setBaseUrl( strUrl );
+        
+        Map<String, Object> model = _pager.getPaginatedListModel( request, getLocale( ) );
         model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean.toMap() );
         model.put( MARK_NOTIFYGRU_FORM_MAP_POSITION_LABEL, mapBeanListPosition );
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, TEMPLATE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, model );
@@ -168,7 +182,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     @View( VIEW_CREATE_NOTIFYGRUMAPPINGMANAGER )
     public String getCreateNotifygruMappingManager( HttpServletRequest request )
     {
-        _notifygrumappingmanager = ( _notifygrumappingmanager != null ) ? _notifygrumappingmanager : new NotifygruMappingManager( );
+        _notifygrumappingmanager = new NotifygruMappingManager( );
 
         ReferenceList referenceListBean = NotifygruMappingManagerService.getListProvider( );
         String strCurrentBeanKey = request.getParameter( PARAMS_REQUEST_BEAN_KEY );
@@ -197,7 +211,6 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
         model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, listPosition );
         model.put( MARK_NOTIFYGRU_FORM_CURRENT_BEAN_KEY, strCurrentBeanKey );
         model.put( MARK_BASE_URL, url );
-        model.put( MARK_KEY_AJAX, Constants.KEY_BEAN );
 
         return getPage( PROPERTY_PAGE_TITLE_CREATE_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_CREATE_NOTIFYGRUMAPPINGMANAGER, model );
     }
@@ -212,9 +225,6 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     @Action( ACTION_CREATE_NOTIFYGRUMAPPINGMANAGER )
     public String doCreateNotifygruMappingManager( HttpServletRequest request )
     {
-
-        _notifygrumappingmanager = ( _notifygrumappingmanager != null ) ? _notifygrumappingmanager : new NotifygruMappingManager( );
-
         populate( request );
 
         // Check constraints
@@ -239,6 +249,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
 
     protected void populate( HttpServletRequest request )
     {
+        _notifygrumappingmanager = new NotifygruMappingManager( );
 
         try
         {
@@ -283,15 +294,15 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
      *            The Http request
      * @return the html code to confirm
      */
-    @Action( ACTION_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER )
+    @Action( value = ACTION_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER, securityTokenAction = ACTION_REMOVE_NOTIFYGRUMAPPINGMANAGER )
     public String getConfirmRemoveNotifygruMappingManager( HttpServletRequest request )
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER ) );
         UrlItem url = new UrlItem( getActionUrl( ACTION_REMOVE_NOTIFYGRUMAPPINGMANAGER ) );
         url.addParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER, nId );
 
-        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER, url.getUrl( ),
-                AdminMessage.TYPE_CONFIRMATION );
+        String strMessageUrl = AdminMessageService.getMessageUrl( request, MESSAGE_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER, null, null, url.getUrl( ),
+        		null, AdminMessage.TYPE_CONFIRMATION, null, JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
 
         return redirect( request, strMessageUrl );
     }
@@ -325,10 +336,7 @@ public class NotifygruMappingManagerJspBean extends ManageModulenotifygrumapping
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER ) );
 
-        if ( _notifygrumappingmanager == null || ( _notifygrumappingmanager.getId( ) != nId ) )
-        {
-            _notifygrumappingmanager = NotifygruMappingManagerHome.findByPrimaryKey( nId );
-        }
+        _notifygrumappingmanager = NotifygruMappingManagerHome.findByPrimaryKey( nId );
 
         ReferenceList referenceListBean = new ReferenceList( );
         ReferenceList listPosition = new ReferenceList( );

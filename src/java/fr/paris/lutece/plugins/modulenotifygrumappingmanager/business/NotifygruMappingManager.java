@@ -33,8 +33,8 @@
  */
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.business;
 
-import javax.validation.constraints.*;
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 
