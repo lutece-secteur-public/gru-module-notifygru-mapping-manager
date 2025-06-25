@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015, Mairie de Paris
+ * Copyright (c) 2002-2025, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,14 +38,14 @@ import fr.paris.lutece.test.LuteceTestCase;
 
 public class NotifygruMappingManagerBusinessTest extends LuteceTestCase
 {
-    private final static String BEANKEY1 = "BeanKey1";
-    private final static String BEANKEY2 = "BeanKey2";
-    private final static int MOBILEPHONENUMBER1 = 1;
-    private final static int MOBILEPHONENUMBER2 = 2;
-    private final static int FIXEDPHONENUMBER1 = 1;
-    private final static int FIXEDPHONENUMBER2 = 2;
-    private final static int EMAIL1 = 1;
-    private final static int EMAIL2 = 2;
+    private static final String BEANKEY1 = "BeanKey1";
+    private static final String BEANKEY2 = "BeanKey2";
+    private static final int MOBILEPHONENUMBER1 = 1;
+    private static final int MOBILEPHONENUMBER2 = 2;
+    private static final int FIXEDPHONENUMBER1 = 1;
+    private static final int FIXEDPHONENUMBER2 = 2;
+    private static final int EMAIL1 = 1;
+    private static final int EMAIL2 = 2;
 
     public void testBusiness( )
     {
