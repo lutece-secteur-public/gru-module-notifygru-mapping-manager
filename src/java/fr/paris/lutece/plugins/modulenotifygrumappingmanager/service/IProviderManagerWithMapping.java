@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2017, Mairie de Paris
+ * Copyright (c) 2002-2025, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@
  */
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.service;
 
-import fr.paris.lutece.plugins.workflowcore.service.provider.AbstractProviderManager;
+import fr.paris.lutece.plugins.workflowcore.service.provider.IProviderManager;
 import fr.paris.lutece.plugins.workflowcore.service.provider.ProviderDescription;
 import java.util.Collection;
 
@@ -42,27 +42,16 @@ import fr.paris.lutece.util.ReferenceList;
 
 /**
  * This class represents a manager of providers with mapping
- * 
- * @deprecated use {@link IProviderManagerWithMapping} instead
- * This class will be removed in future versions.
+ *
  */
-@Deprecated( since = "3.0.0", forRemoval = true )
-public abstract class AbstractProviderManagerWithMapping extends AbstractProviderManager
+public interface IProviderManagerWithMapping extends IProviderManager
 {
-    /**
-     * @param strId
-     */
-    public AbstractProviderManagerWithMapping( String strId )
-    {
-        super( strId );
-    }
-
-    /**
+	/**
      * Gives the provider description for all the providers /all task managed by this manager.
      * 
      * @return all the provider descriptions
      */
-    public abstract Collection<ProviderDescription> getAllProviderDescriptions( );
+    Collection<ProviderDescription> getAllProviderDescriptions( );
 
     /**
      * Gives the list of ReferenceItem for a given provider
@@ -71,5 +60,6 @@ public abstract class AbstractProviderManagerWithMapping extends AbstractProvide
      *            the provider id
      * @return ReferenceList
      */
-    public abstract ReferenceList getMappingPropertiesForProvider( String strProviderId );
+    ReferenceList getMappingPropertiesForProvider( String strProviderId );
+
 }

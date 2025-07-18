@@ -34,7 +34,7 @@
 package fr.paris.lutece.plugins.modulenotifygrumappingmanager.service;
 
 import fr.paris.lutece.plugins.workflow.service.provider.ProviderManagerUtil;
-import fr.paris.lutece.plugins.workflowcore.service.provider.AbstractProviderManager;
+import fr.paris.lutece.plugins.workflowcore.service.provider.IProviderManager;
 import fr.paris.lutece.plugins.workflowcore.service.provider.ProviderDescription;
 import java.util.Collection;
 
@@ -53,7 +53,7 @@ public class NotifygruMappingManagerService
     {
         ReferenceList refenreceList = new ReferenceList( );
 
-        for ( AbstractProviderManagerWithMapping providerManager : CDI.current( ).select( AbstractProviderManagerWithMapping.class ).stream( ).toList( ) )
+        for ( IProviderManagerWithMapping providerManager : CDI.current( ).select( IProviderManagerWithMapping.class ).stream( ).toList( ) )
         {
             Collection<ProviderDescription> collectionProviderDescriptions = providerManager.getAllProviderDescriptions( );
 
@@ -75,11 +75,11 @@ public class NotifygruMappingManagerService
 
         String strProviderManagerId = ProviderManagerUtil.fetchProviderManagerId( strKey );
         String strProviderId = ProviderManagerUtil.fetchProviderId( strKey );
-        AbstractProviderManager providerManager = ProviderManagerUtil.fetchProviderManager( strProviderManagerId );
+        IProviderManager providerManager = ProviderManagerUtil.retrieveProviderManager( strProviderManagerId );
 
-        if ( providerManager != null && providerManager instanceof AbstractProviderManagerWithMapping )
+        if ( providerManager instanceof IProviderManagerWithMapping providerManagerWithMapping )
         {
-            refenreceList.addAll( ( (AbstractProviderManagerWithMapping) providerManager ).getMappingPropertiesForProvider( strProviderId ) );
+            refenreceList.addAll( providerManagerWithMapping.getMappingPropertiesForProvider( strProviderId ) );
         }
 
         return refenreceList;
