@@ -1,3 +1,6 @@
+--liquibase formatted sql
+--changeset modulenotifygrumappingmanager:create_db_modulenotifygrumappingmanager.sql
+--preconditions onFail:MARK_RAN onError:WARN
 
 --
 -- Structure for table modulenotifygrumappingmanager_
