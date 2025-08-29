@@ -53,6 +53,7 @@ import fr.paris.lutece.portal.util.mvc.admin.MVCAdminJspBean;
 import fr.paris.lutece.portal.util.mvc.admin.annotations.Controller;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.Action;
 import fr.paris.lutece.portal.util.mvc.commons.annotations.View;
+import fr.paris.lutece.portal.web.cdi.mvc.Models;
 import fr.paris.lutece.portal.web.util.IPager;
 import fr.paris.lutece.portal.web.util.Pager;
 import fr.paris.lutece.util.ReferenceItem;
@@ -137,6 +138,9 @@ public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
     @Pager( listBookmark = MARK_NOTIFYGRUMAPPINGMANAGER_LIST, defaultItemsPerPage = PROPERTY_DEFAULT_LIST_ITEM_PER_PAGE )
     private IPager<NotifygruMappingManager, Void> _pager;
 
+    @Inject 
+    private Models model;
+
     /**
      * Build the Manage View
      * 
@@ -162,11 +166,11 @@ public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
         
         UrlItem url = new UrlItem( JSP_MANAGE_NOTIFYGRUMAPPINGMANAGERS );
         String strUrl = url.getUrl( );
-        
-        _pager.setList( listNotifygruMappingManagers );
-        _pager.setBaseUrl( strUrl );
-        
-        Map<String, Object> model = _pager.getPaginatedListModel( request, getLocale( ) );
+
+        _pager.withBaseUrl( strUrl )
+        .withListItem( listNotifygruMappingManagers )
+        .populateModels( request, model, getLocale( ) );
+
         model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean.toMap() );
         model.put( MARK_NOTIFYGRU_FORM_MAP_POSITION_LABEL, mapBeanListPosition );
         return getPage( PROPERTY_PAGE_TITLE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, TEMPLATE_MANAGE_NOTIFYGRUMAPPINGMANAGERS, model );
@@ -187,7 +191,6 @@ public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
         ReferenceList referenceListBean = NotifygruMappingManagerService.getListProvider( );
         String strCurrentBeanKey = request.getParameter( PARAMS_REQUEST_BEAN_KEY );
 
-        Map<String, Object> model = getModel( );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _notifygrumappingmanager );
         model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean );
 
@@ -356,11 +359,8 @@ public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
             }
         }
 
-        Map<String, Object> model = getModel( );
         model.put( MARK_NOTIFYGRUMAPPINGMANAGER, _notifygrumappingmanager );
-
         model.put( MARK_NOTIFYGRU_FORM_LIST_PROVIDER, referenceListBean );
-
         model.put( MARK_NOTIFYGRU_FORM_LIST_POSITION, listPosition );
 
         return getPage( PROPERTY_PAGE_TITLE_MODIFY_NOTIFYGRUMAPPINGMANAGER, TEMPLATE_MODIFY_NOTIFYGRUMAPPINGMANAGER, model );
