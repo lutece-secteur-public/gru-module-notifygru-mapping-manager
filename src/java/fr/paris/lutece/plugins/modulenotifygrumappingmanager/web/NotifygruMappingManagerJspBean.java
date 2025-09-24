@@ -66,7 +66,7 @@ import java.util.HashMap;
  */
 @RequestScoped
 @Named
-@Controller( controllerJsp = "ManageNotifygruMappingManagers.jsp", controllerPath = "jsp/admin/plugins/modulenotifygrumappingmanager/", right = "MODULENOTIFYGRUMAPPINGMANAGER_MANAGEMENT" )
+@Controller( controllerJsp = "ManageNotifygruMappingManagers.jsp", controllerPath = "jsp/admin/plugins/modulenotifygrumappingmanager/", right = "MODULENOTIFYGRUMAPPINGMANAGER_MANAGEMENT", securityTokenEnabled = true )
 public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
 {
 
