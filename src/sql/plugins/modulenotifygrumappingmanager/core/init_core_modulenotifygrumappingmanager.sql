@@ -1,6 +1,6 @@
---liquibase formatted sql
---changeset modulenotifygrumappingmanager:init_core_modulenotifygrumappingmanager.sql
---preconditions onFail:MARK_RAN onError:WARN
+-- liquibase formatted sql
+-- changeset modulenotifygrumappingmanager:init_core_modulenotifygrumappingmanager.sql
+-- preconditions onFail:MARK_RAN onError:WARN
 
 --
 -- Data for table core_admin_right
