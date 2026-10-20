@@ -5,7 +5,7 @@
 			<@messages errors=errors />
 			<@input type='hidden' name='view' value='createNotifygruMappingManager' />
 			<@formGroup labelFor='beankey' labelKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey}' helpKey='#i18n{modulenotifygrumappingmanager.create_notifygrumappingmanager.labelBeanKey.help}' mandatory=true>
-				<@select name='beankey' default_value='${beankey!\'\'}'  params='onChange="submit()"' items=list_provider />
+				<@select name='beankey' default_value='${beankey!\'\'}'  params={ 'data-lutece-action': 'submit' } items=list_provider />
 			</@formGroup>
 		</@tform>
 
