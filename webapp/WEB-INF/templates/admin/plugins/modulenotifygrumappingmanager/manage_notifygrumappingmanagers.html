@@ -37,9 +37,9 @@
 					</@tr>
 					<@tableHeadBodySeparator />
 					<#list notifygrumappingmanager_list as notifygrumappingmanager >
-						<#assign listPosition = mapPositionLabel[notifygrumappingmanager.beanKey]>
+						<#assign listPosition = mapPositionLabel[notifygrumappingmanager.beanKey]![]>
 						<@tr>
-							<@td>${list_provider[notifygrumappingmanager.beanKey]!beanKey!}</@td>
+							<@td>${list_provider[notifygrumappingmanager.beanKey]!notifygrumappingmanager.beanKey!}</@td>
 							<@td>${notifygrumappingmanager.demandeTypeId!}</@td>
 							<@td>${getLabelFromPosition(listPosition,notifygrumappingmanager.connectionId)!}</@td>
 							<@td>${getLabelFromPosition(listPosition,notifygrumappingmanager.customerId)!}</@td>
