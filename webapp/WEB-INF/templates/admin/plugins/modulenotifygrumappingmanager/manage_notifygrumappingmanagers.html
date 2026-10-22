@@ -49,7 +49,7 @@
 							<@td>${getLabelFromPosition(listPosition,notifygrumappingmanager.demandReference)!}</@td>
 							<@td>
 								<@aButton href='jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp?view=modifyNotifygruMappingManager&id=${notifygrumappingmanager.id}' title='#i18n{portal.util.labelModify}' hideTitle=['all'] buttonIcon='edit' size='sm' />
-								<@aButton href='jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp?action=confirmRemoveNotifygruMappingManager&id=${notifygrumappingmanager.id}' title='#i18n{portal.util.labelDelete}' hideTitle=['all'] buttonIcon='trash' color='danger' size='sm' />
+								<@aButton href='jsp/admin/plugins/modulenotifygrumappingmanager/ManageNotifygruMappingManagers.jsp?view=confirmRemoveNotifygruMappingManager&id=${notifygrumappingmanager.id}' title='#i18n{portal.util.labelDelete}' hideTitle=['all'] buttonIcon='trash' color='danger' size='sm' />
 							</@td>
 						</@tr>
 					</#list>

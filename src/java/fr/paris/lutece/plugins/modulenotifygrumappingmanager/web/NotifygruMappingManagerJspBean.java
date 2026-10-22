@@ -125,7 +125,7 @@ public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
     private static final String ACTION_CREATE_NOTIFYGRUMAPPINGMANAGER = "createNotifygruMappingManager";
     private static final String ACTION_MODIFY_NOTIFYGRUMAPPINGMANAGER = "modifyNotifygruMappingManager";
     private static final String ACTION_REMOVE_NOTIFYGRUMAPPINGMANAGER = "removeNotifygruMappingManager";
-    private static final String ACTION_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER = "confirmRemoveNotifygruMappingManager";
+    private static final String VIEW_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER = "confirmRemoveNotifygruMappingManager";
 
     // Infos
     private static final String INFO_NOTIFYGRUMAPPINGMANAGER_CREATED = "modulenotifygrumappingmanager.info.notifygrumappingmanager.created";
@@ -297,7 +297,7 @@ public class NotifygruMappingManagerJspBean extends MVCAdminJspBean
      *            The Http request
      * @return the html code to confirm
      */
-    @Action( value = ACTION_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER, securityTokenAction = ACTION_REMOVE_NOTIFYGRUMAPPINGMANAGER )
+    @View( value = VIEW_CONFIRM_REMOVE_NOTIFYGRUMAPPINGMANAGER, securityTokenAction = ACTION_REMOVE_NOTIFYGRUMAPPINGMANAGER )
     public String getConfirmRemoveNotifygruMappingManager( HttpServletRequest request )
     {
         int nId = Integer.parseInt( request.getParameter( PARAMETER_ID_NOTIFYGRUMAPPINGMANAGER ) );
